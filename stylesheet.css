@@ -1,0 +1,42 @@
+body {
+	background-image: url("ECE-Paris.png");
+	background-size: 125%;
+	background-position: center;
+}
+
+#wrapper{
+	float: left;
+	width: 1200px;
+	margin-left: 18%;
+	background-color: white;
+}
+
+#header{
+	float: left;
+	height: 90px;
+	margin-left: 20px;
+}
+
+
+#header img{
+	float: left;
+	margin-left: 100%;
+}
+
+#navigation{
+	float: left;
+	height: 90px;
+	margin-left: 20px;
+	border-top: solid lightgrey;
+	border-bottom: solid lightgrey;
+
+}
+
+#section {
+	margin-left: 20px;
+	height: 1000px;
+}
+
+
+
+
