@@ -10,5 +10,21 @@ img {
 }
 
 
+#categorie {
+	height: 50px;
+	font-size: 1.5em;
+}
+
+#recherche {
+	height: 50px;
+	font-size: 1.5em;
+}
+
+#saisie {
+	height: 50px;
+	font-size: 1.5em;
+}
+
+
 
 

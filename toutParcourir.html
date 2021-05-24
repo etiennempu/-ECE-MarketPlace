@@ -52,13 +52,32 @@
 			</div>
 		</div>
 
-		<!--Reste de la page-->
-		<div class="container">
-			<div class="row">
+		<!--SECTION-->
+		<div class="section container">
+			<div class="searchBar row">
 				<div class="col">
-					<h1>SECTION</h1>
+					<form>
+						<fieldset>
+							<input id="categorieValeur" type="hidden" value="0"/>
+							<div class="input-group-prepend">
+								<button id="categorie" class="btn btn-primary dropdown-toggle" type="button">Catégorie</button>
+								<div id="categorieListe" class="dropdown-menu">
+									<a class="dropdown-item" data-valeur="0" href="#">Catégorie</a>	
+									<a class="dropdown-item" data-valeur="1" href="#">...</a>				
+								</div class="recherche">
+									<input id="saisie" name="saisie" type="text" class="form-control" aria-label="Saisie de mots clés" placeholder="Mot(s) clé(s)" required="required">
+			        				<div class="input-group-append">
+			          				<button id="recherche" class="btn btn-primary" type="submit">Recherche</button>
+		        				</div>						
+							</div>
+						</fieldset>
+					</form>
 				</div>
 			</div>
+		</div>
+
+		<!--FOOTER-->
+		<div class="container">
 			<div class="row">
 				<div class="col">
 					<h1>FOOTER</h1>
