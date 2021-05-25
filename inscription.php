@@ -1,5 +1,4 @@
 <?php  
-	echo "je rentre peu-etre <br>";
 		if($_SERVER["REQUEST_METHOD"] == "POST") {
 
 			echo "je suis rentre fdp <br>";
@@ -30,12 +29,6 @@
 
 			$db_found = mysqli_select_db($db_handle, "ece-marketplace");
 
-			echo $firstname."<br>";
-			echo $name."<br>";
-			echo $mail."<br>";
-			echo $numero."<br>";
-			echo $password."<br>";
-
 
 			if($db_found){
 				$sql = "INSERT INTO user (nom, prenom, mail, numero, mdp, type, photo, id_adresse) VALUES ('$name', '$firstname', '$mail', '$numero', '$password', 1, '0', '0')";
@@ -44,10 +37,9 @@
 			}
 
 			mysqli_close($db_handle);
-			echo "connection closed.";
 
-			/*header('Location: index.php');
-			exit();*/
+			header('Location: index.php');
+			exit();
 
 		}	
 ?>
@@ -63,38 +55,37 @@
 
 </head>
 <body>
-	<div class="container">
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col">
 				<form action="inscription.php" method="post">
+					<img id="logoInscription" src="logoMarketPlace.png" alt="logo ECE Market Place">
+					<h1 id="titreInscription">INSCRIPTION</h1>
 					<table>
 						<tr>
-							<td><label>Prénom: </label></td>
-							<td><input type="text" name="firstname" placeholder="Votre prénom"></td>
+							<td><input type="text" name="firstname" placeholder="Votre prénom"  size="50px"></td>
 						</tr>
 						<tr>
-							<td><label>Nom: </label></td>
-							<td><input type="text" name="name" placeholder="Votre nom"></td>
+							<td><input type="text" name="name" placeholder="Votre nom" size="50px"></td>
 						</tr>
 						<tr>
-							<td><label>Adresse mail: </label></td>
-							<td><input type="mail" name="mail" placeholder="Votre adresse mail"></td>
+							<td><input type="mail" name="mail" placeholder="Votre adresse mail" size="50px"></td>
 						</tr>
 						<tr>
-							<td><label>Numéro de téléphone: </label></td>
-							<td><input type="number" name="num" placeholder="Votre numéro de téléphone"></td>
+							<td><input type="number" name="num" placeholder="Votre numéro de téléphone" size="50"></td>
 						</tr>
 						<tr>
-							<td><label>Mot de passe: </label></td>
-							<td><input type="password" name="password" placeholder="Votre mot de passe"></td>
+							<td><input type="password" name="password" placeholder="Votre mot de passe" size="50px"></td>
 						</tr>
 						<tr>
-							<td><label>Adresse: </label></td>
-							<td><input type="text" name="adress" placeholder="Votre adresse"></td>
+							<td><input type="text" name="adress" placeholder="Votre adresse" size="50px"></td>
 						</tr>
 					</table>
-					<button name="confirmer">Je confirme mes informations</button>
+					<button id="inscrire" class="btn btn-primary" type="submit">S'INSCRIRE</button>
 				</form>				
+			</div>
+			<div class="fondInscription col">
+
 			</div>
 		</div>
 	</div>

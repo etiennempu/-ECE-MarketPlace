@@ -9,6 +9,37 @@ img {
 	width: 100%;
 }
 
+td{
+	padding-top: 5px;
+	padding-bottom: 20px;
+	padding-left: 130px;
+}
+
+.fondInscription {
+	background-color: #00B0F0;
+}
+
+#titreInscription {
+	margin-left: 28%;
+	padding-top: 20px;
+	padding-bottom: 45px;
+	color: #2F5597;
+	font-family: Bahnschrift;
+}
+
+#inscrire {
+	background-color: #00B0F0;
+	margin-left: 260px;
+	font-family: Segoe UI Black;
+	margin-top: 50px;
+	border-style: none;
+}
+
+
+#logoInscription {
+	width: 450px;
+}
+
 #logo {
 	height: 130px;
 	width: 440px;
