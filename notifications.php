@@ -1,3 +1,7 @@
+<?php
+// On démarre la session AVANT d'écrire du code HTML
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,16 +16,26 @@
 
 		<!--HEADER-->
 		<div class="header container">
-			<div class="row">
-				<div class="col">
-				</div>
+			<div class="row">	
 		<!--LOGO-->
-				<div class="col">
+				<div class="col-7">
 					<a href="index.php"><img id="logo" src="logoMarketPlace.png" alt="logo ECE Market Place"></a>
 				</div>
-				<div class="col">
-					<a href="inscription.php"><label id="inscription">Inscription </label></a>
-					<a href="connexion.php"><label id="connexion">Connexion</label></a>
+				<div class="col-5">
+						<?php 
+							if($_SESSION['id']!=0){
+
+								echo '<label id="prenom">'.$_SESSION['prenom'] .' </label>';
+								echo '<label id="nom">'.$_SESSION['nom'] .'</label>';
+								echo '<a href="deconnexion.php"><label id="deconnexion">Deconnexion</label></a>';
+							}
+							else{
+								
+								echo '<a href="inscription.php"><label id="inscription">Inscription </label></a>';
+								echo '<a href="connexion.php"><label id="connexion">Connexion</label></a>';
+							}
+
+						 ?>
 				</div>
 			</div>
 		</div>

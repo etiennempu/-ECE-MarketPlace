@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Test</title>
-</head>
-<body>
-
 <?php 
 
+	session_start();
 
 	echo"hello";
 	// Variable connexion
@@ -43,28 +37,24 @@ if($db_found){
 
 		while($data = mysqli_fetch_assoc($result)) {
 			foreach($data as $key => $value){
-						echo $key . " : " . $value . "<br>";
+						//echo $key . " : " . $value . "<br>";
+						$_SESSION["$key"]=$value;
+						 //echo "<br>----------------------- <br>";
+						 //echo $key . " : " . $_SESSION['prenom'] . "<br>";
+						
 			}	
-			echo "----------------------- <br>";
+			//echo "----------------------- <br>";
 		}
 
 	} else {
 		echo "DB not found";
 	}
 
-	// function test(){
-	// 	$sql = "
-	// 			SELECT id
-	// 			FROM user
-	// 			WHERE prenom LIKE 'Etienne'
-	// 		";
-
-	// 	var nom_btn= document.getElementsByTagName("id");
-	// 		$result = mysqli_query($db_handle, $sql);
-	// 		nom_btn.=$result;
-	// }
-
 mysqli_close($db_handle);
 	echo "connection closed.";
+
+header('Location: accueil.php');
+exit();
+
 	
  ?>

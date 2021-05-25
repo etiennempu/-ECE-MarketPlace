@@ -1,3 +1,7 @@
+<?php
+// On démarre la session AVANT d'écrire du code HTML
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,16 +16,26 @@
 
 		<!--HEADER-->
 		<div class="header container">
-			<div class="row">
-				<div class="col">
-				</div>
+			<div class="row">	
 		<!--LOGO-->
-				<div class="col">
+				<div class="col-7">
 					<a href="index.php"><img id="logo" src="logoMarketPlace.png" alt="logo ECE Market Place"></a>
 				</div>
-				<div class="col">
-					<a href="inscription.php"><label id="inscription">Inscription </label></a>
-					<a href="connexion.php"><label id="connexion">Connexion</label></a>
+				<div class="col-5">
+						<?php 
+							if($_SESSION['id']!=0){
+
+								echo '<label id="prenom">'.$_SESSION['prenom'] .' </label>';
+								echo '<label id="nom">'.$_SESSION['nom'] .'</label>';
+								echo '<a href="deconnexion.php"><label id="deconnexion">Deconnexion</label></a>';
+							}
+							else{
+								
+								echo '<a href="inscription.php"><label id="inscription">Inscription </label></a>';
+								echo '<a href="connexion.php"><label id="connexion">Connexion</label></a>';
+							}
+
+						 ?>
 				</div>
 			</div>
 		</div>
@@ -59,18 +73,8 @@
 		<div class="section container">
 			<div class="row">
 				<div class="col">
-					<form>
-						<table>
-							<tr>
-								<td><label>Username: </label></td>
-								<td><input type="text" id="username"></td>
-							</tr>
-							<tr>
-								<td><label>Password: </label></td>
-								<td><input type="password" id="password"></td>
-							</tr>
-						</table>
-						<input type="submit" value="Soumettre" id="soumettre" action="votreCompte.php" method="post">
+					<!-- <h1>SECTION</h1> -->
+					<!-- <p><?php echo $_SESSION['prenom']." ".$_SESSION['nom']." ".$_SESSION['id']; ?></p> -->
 				</div>
 			</div>
 			<div class="row">
