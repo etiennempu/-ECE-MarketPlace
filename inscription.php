@@ -63,22 +63,22 @@
 					<h1 id="titreInscription">INSCRIPTION</h1>
 					<table>
 						<tr>
-							<td><input type="text" name="firstname" placeholder="Votre prénom"  size="50px"></td>
+							<td><input type="text" name="firstname" class="form-control" required="required" placeholder="Votre prénom"  size="50px"></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="name" placeholder="Votre nom" size="50px"></td>
+							<td><input type="text" name="name" class="form-control" required="required" placeholder="Votre nom" size="50px"></td>
 						</tr>
 						<tr>
-							<td><input type="mail" name="mail" placeholder="Votre adresse mail" size="50px"></td>
+							<td><input type="mail" name="mail" class="form-control" required="required" placeholder="Votre adresse mail" size="50px"></td>
 						</tr>
 						<tr>
-							<td><input type="number" name="num" placeholder="Votre numéro de téléphone" size="50"></td>
+							<td><input type="number" name="num" class="form-control" required="required" placeholder="Votre numéro de téléphone" size="50"></td>
 						</tr>
 						<tr>
-							<td><input type="password" name="password" placeholder="Votre mot de passe" size="50px"></td>
+							<td><input type="password" name="password" class="form-control" required="required" placeholder="Votre mot de passe" size="50px"></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="adress" placeholder="Votre adresse" size="50px"></td>
+							<td><input type="text" name="adress" class="form-control" required="required" placeholder="Votre adresse" size="50px"></td>
 						</tr>
 					</table>
 					<button id="inscrire" class="btn btn-primary" type="submit">S'INSCRIRE</button>

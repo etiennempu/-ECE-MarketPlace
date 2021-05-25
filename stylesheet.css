@@ -20,18 +20,18 @@ td{
 }
 
 #titreInscription {
-	margin-left: 28%;
-	padding-top: 20px;
-	padding-bottom: 45px;
+	margin-left: 30%;
+	padding-top: 10px;
+	padding-bottom: 30px;
 	color: #2F5597;
 	font-family: Bahnschrift;
 }
 
 #inscrire {
 	background-color: #00B0F0;
-	margin-left: 260px;
+	margin-left: 270px;
 	font-family: Segoe UI Black;
-	margin-top: 50px;
+	margin-top: 20px;
 	border-style: none;
 }
 
