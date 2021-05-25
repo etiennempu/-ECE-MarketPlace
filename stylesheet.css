@@ -13,6 +13,7 @@ img {
 	height: 130px;
 	width: 440px;
 	padding-top: 10px;
+	float: right;
 }
 
 #inscription {
@@ -31,6 +32,27 @@ img {
 	border-left: solid lightgrey;
 	padding-left: 5px;
 }
+#prenom {
+	padding-bottom: 10px;
+	margin-top: 45px;
+	font-size: 1.5em;
+	color: lightgrey;
+}#nom {
+	padding-bottom: 10px;
+	margin-top: 45px;
+	font-size: 1.5em;
+	color: lightgrey;
+	padding-left: 5px;
+}
+#deconnexion{
+	padding-bottom: 10px;
+	margin-top: 40px;
+	font-size: 1.5em;
+	height: 40px;
+	color: lightgrey;
+	border-left: solid lightgrey;
+	padding-left: 5px;
+	}
 
 #categorie {
 	height: 50px;
