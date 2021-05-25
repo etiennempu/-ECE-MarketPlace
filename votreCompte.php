@@ -32,7 +32,7 @@
 				<nav class="col navbar navbar-expand-lg">
 					 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" name="MENU"><span class="navbar-toggler-icon"></span>
 	   				</button>
-	   				<div id="navbarContent" class="collapse navbar-collapse">
+	   				<div id="navbarContent" class="collapse navbar-collapse navbar-light">
 						<ul class="navbar-nav">
 							<li class="nav-item">
 								<a class="nav-link" href="accueil.php"><img src="accueil.png" alt="bouton Accueil"></a>

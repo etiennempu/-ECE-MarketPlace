@@ -29,7 +29,7 @@
 		<!--NAVIGATION-->
 		<div class="navigation container">
 			<div class="row">
-				<nav class="col navbar navbar-expand-lg">
+				<nav class="col navbar navbar-expand-lg nvabar-light">
 					 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" name="MENU"><span class="navbar-toggler-icon"></span>
 	   				</button>
 	   				<div id="navbarContent" class="collapse navbar-collapse">
