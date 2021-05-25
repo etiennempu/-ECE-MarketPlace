@@ -93,7 +93,7 @@ $_SESSION['mes_articles']= [];
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<p><?php echo $_SESSION['prenom']." ".$_SESSION['nom']; ?></p>
+					<h1>SECTION</h1>
 				</div>
 			</div>
 			<div class="row">

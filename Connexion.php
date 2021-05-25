@@ -21,13 +21,13 @@ $sql = "SET NAMES utf8";
 	$result = mysqli_query($db_handle, $sql);
 
 
-	$db_found = mysqli_select_db($db_handle, "ecemarketplace");
+	$db_found = mysqli_select_db($db_handle, "ece-marketplace");
 
 if($db_found){
 	$sql = "
 				SELECT *
 				FROM user
-				WHERE prenom LIKE 'Etienne'
+				WHERE prenom LIKE 'Alexandre'
 			";
 
 
@@ -56,5 +56,4 @@ mysqli_close($db_handle);
 header('Location: accueil.php');
 exit();
 
-	
  ?>
