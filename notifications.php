@@ -17,7 +17,7 @@
 				</div>
 		<!--LOGO-->
 				<div class="col">
-					<a href="index.html"><img id="logo" src="logoMarketPlace.png" alt="logo ECE Market Place"></a>
+					<a href="index.php"><img id="logo" src="logoMarketPlace.png" alt="logo ECE Market Place"></a>
 				</div>
 				<div class="col">
 					<a href="inscription.php"><label id="inscription">Inscription </label></a>
@@ -35,19 +35,19 @@
 	   				<div id="navbarContent" class="collapse navbar-collapse">
 						<ul class="navbar-nav">
 							<li class="nav-item">
-								<a class="nav-link" href="accueil.html"><img src="accueil.png" alt="bouton Accueil"></a>
+								<a class="nav-link" href="accueil.php"><img src="accueil.png" alt="bouton Accueil"></a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="toutParcourir.html"><img src="toutParcourir.png" alt="bouton Tout Parcourir"></a>
+								<a class="nav-link" href="toutParcourir.php"><img src="toutParcourir.png" alt="bouton Tout Parcourir"></a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="notifications.html"><img src="notifs.png" alt="bouton Notifications"></a>
+								<a class="nav-link" href="notifications.php"><img src="notifsSelect.png" alt="bouton Notifications"></a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="panier.html"><img src="panier.png" alt="bouton Panier"></a>
+								<a class="nav-link" href="panier.php"><img src="panier.png" alt="bouton Panier"></a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="votreCompte.html"><img src="votreCompteSelect.png" alt="bouton Votre Compte"></a>
+								<a class="nav-link" href="votreCompte.php"><img src="votreCompte.png" alt="bouton Votre Compte"></a>
 							</li>
 						</ul>
 					</div>
@@ -56,21 +56,10 @@
 		</div>
 
 		<!--Reste de la page-->
-		<div class="section container">
+		<div class="container">
 			<div class="row">
 				<div class="col">
-					<form>
-						<table>
-							<tr>
-								<td><label>Username: </label></td>
-								<td><input type="text" id="username"></td>
-							</tr>
-							<tr>
-								<td><label>Password: </label></td>
-								<td><input type="password" id="password"></td>
-							</tr>
-						</table>
-						<input type="submit" value="Soumettre" id="soumettre" action="votreCompte.php" method="post">
+					<h1>SECTION</h1>
 				</div>
 			</div>
 			<div class="row">
