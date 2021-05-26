@@ -1,17 +1,27 @@
-<?php
-// On démarre la session AVANT d'écrire du code HTML
-session_start();
-if($_SESSION['type']==1)
-    {
-        header("location: accueilClient.php");
+<?php 
+    session_start();
+    // Variable connexion
+            $user = "root";
+            $mdp = "";
+            $addr = "localhost";
 
-    }elseif ($_SESSION['type']==2) 
-    {
-        header("location: accueilVendeur.php");
-    }elseif ($_SESSION['type']==3) 
-    {
-        header("location: accueilAdmin.php");
-    }
+            // Connect to MySQL server
+            $db_handle = mysqli_connect($addr,$user, $mdp);
+
+            if($db_handle) {
+
+            } 
+            else {
+                echo "pas trouve DB";
+                die("Unable to connect. ERROR" . mysqli_error($db_handle));
+            }
+
+            $sql = "SET NAMES utf8";
+            $result = mysqli_query($db_handle, $sql);
+
+
+            $db_found = mysqli_select_db($db_handle, "ece-marketplace");
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -93,6 +103,60 @@ if($_SESSION['type']==1)
 			<div class="row">
 				<div class="col">
 					<h1>SECTION</h1>
+					<p>Bonjour Client :</p>
+					<div class="tableArticles row">
+                <div class="col">
+                    <table class="table">
+                      <thead class="thead-light">
+                        <tbody>
+                            <?php 
+                            $sql="SELECT MAX(id) FROM articles";
+                            $result = mysqli_query($db_handle, $sql);
+
+                            $data = mysqli_fetch_assoc($result);
+                            foreach ($data as $key => $value) 
+                            {
+                                $id_max=$value;
+                            }
+                            
+
+                            for($i = $id_max; $i > $id_max-3; $i--)
+                            {
+                            	
+                                $sql = "SELECT * FROM articles WHERE id = $i";
+                                $result = mysqli_query($db_handle, $sql);
+                                        
+                                $data = mysqli_fetch_assoc($result);
+                                if($data!=NULL)
+                                {           
+                                    foreach($data as $key => $value) {    
+                                        $_SESSION["$key"]=$value;           
+                                    }   
+                                        echo "<tr>";                             
+                                        echo "<td>".$_SESSION['Nom']."<td>";
+                                        echo "<td>".$_SESSION['type']."<td>";
+                                        echo "<td>".$_SESSION['id_vendeur']."<td>";
+                                        echo "<td>".$_SESSION['photo1']."<td>";
+                                        echo "<td>".$_SESSION['prix']."<td>";
+                                        echo "<td>".$_SESSION['description']."<td>";
+                                        echo "</tr>";
+                                }
+                                else 
+                                {
+                                    echo "ERROR";               
+                                    //echo "<script>alert(\"erreur rentrez des champs valides\")</script>";
+                                    // header('Location: connexion.php');
+                                    //exit();
+                                }
+                            }
+                            ?>
+                          </tbody>
+                      </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+
 				</div>
 			</div>
 			<div class="row">
