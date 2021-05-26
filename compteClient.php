@@ -1,18 +1,6 @@
 <?php
 // On démarre la session AVANT d'écrire du code HTML
 session_start();
-	if($_SESSION['type']==1)
-	{
-		header("location: compteClient.php");
-
-	}elseif ($_SESSION['type']==2) 
-	{
-		header("location: compteVendeur.php");
-	}elseif ($_SESSION['type']==3) 
-	{
-		header("location: compteAdmin.php");
-	}
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -93,7 +81,32 @@ session_start();
 		<div class="section container">
 			<div class="row">
 				<div class="col">
-					<p>Pensez à vous connecter</p>
+					<form action="historique.php" method="post">
+						 <p><?php 
+
+						 		echo "Bonjour ".$_SESSION['prenom']." ".$_SESSION['nom']." vous trouverez ici les information relative à votre Compte.<br>";
+						  		echo"Vous vous appelez ".$_SESSION['prenom']." ".$_SESSION['nom'].", votre mail est : ".$_SESSION['mail'].".<br>votre numero est le: ".$_SESSION['numero']."----:".$_SESSION['id_adresse']."--------.<br>";	
+
+						  		
+						  		if($_SESSION['id_adresse'] !=0){
+
+						  			echo"votre adresse est: ".$_SESSION['id_adresse'];
+						  		}else{
+
+						  			echo "oublié pas de modifier votre compte pour renseigner votre adresse!";
+						  		}
+						  ?>	
+						  </p>
+
+						 <p>
+						 	c'est ici que vous pouvez modifier votre compte et accéder à votre historique.
+						 </p>
+						 <button id="historique" class="btn btn-primary" type="submit">Historique</button>
+					</form>
+					<form action="modifiercompte.php">
+					
+						 <button id="historique" class="btn btn-primary" type="submit">Modifier votre compte</button>
+					</form>			 
 				</div>
 			</div>
 			<div class="row">

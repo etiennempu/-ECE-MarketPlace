@@ -7,6 +7,10 @@
 			$mail = isset($_POST["mail"])? $_POST["mail"] : "";
 			$numero = isset($_POST["num"])? $_POST["num"] : "0";
 			$password = isset($_POST["password"])? $_POST["password"] : "";
+			$adresse = isset($_POST["adress"])? $_POST["adress"] : "";
+			if($adresse==NULL){
+				$adresse="0";
+			}
 
 			// Variable connexion
 			$user = "root";
@@ -31,11 +35,10 @@
 
 
 			if($db_found){
-				$sql = "INSERT INTO user (nom, prenom, mail, numero, mdp, type, photo, id_adresse) VALUES ('$name', '$firstname', '$mail', '$numero', '$password', 1, '0', '0')";
+				$sql = "INSERT INTO user (nom, prenom, mail, numero, mdp, type, photo, adresse) VALUES ('$name', '$firstname', '$mail', '$numero', '$password', 1, '0', '$adresse')";
 				$result = mysqli_query($db_handle, $sql);
 				echo $result;
 			}
-
 			mysqli_close($db_handle);
 
 			header('Location: index.php');
@@ -78,7 +81,7 @@
 							<td><input type="password" name="password" class="form-control" required="required" placeholder="Votre mot de passe" size="50px"></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="adress" class="form-control" required="required" placeholder="Votre adresse" size="50px"></td>
+							<td><input type="text" name="adress" class="form-control" placeholder="Votre adresse" size="50px"></td>
 						</tr>
 					</table>
 					<button id="inscrire" class="btn btn-primary" type="submit">S'INSCRIRE</button>

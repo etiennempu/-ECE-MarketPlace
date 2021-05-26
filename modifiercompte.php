@@ -1,17 +1,85 @@
 <?php
 // On démarre la session AVANT d'écrire du code HTML
 session_start();
-	if($_SESSION['type']==1)
-	{
-		header("location: compteClient.php");
+	if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-	}elseif ($_SESSION['type']==2) 
-	{
-		header("location: compteVendeur.php");
-	}elseif ($_SESSION['type']==3) 
-	{
-		header("location: compteAdmin.php");
-	}
+			$firstname = isset($_POST["firstname"])? $_POST["firstname"] : ""; 
+			$name = isset($_POST["name"])? $_POST["name"] : "";
+			$mail = isset($_POST["mail"])? $_POST["mail"] : "";
+			$numero = isset($_POST["num"])? $_POST["num"] : "0";
+			$password = isset($_POST["password"])? $_POST["password"] : "";
+			$adresse = isset($_POST["adress"])? $_POST["adress"] : "";
+			
+			if($firstname==NULL){
+				$firstname=$_SESSION['prenom'];
+			}else{
+				$_SESSION['prenom']=$firstname;
+			}
+
+			if($name==NULL){
+				$name=$_SESSION['nom'];
+			}else{
+				$_SESSION['nom']=$name;
+			}
+
+			if($mail==NULL){
+				$mail=$_SESSION['mail'];
+			}else{
+				$_SESSION['mail']=$mail;
+			}
+
+			if($numero==NULL){
+				$numero=$_SESSION['numero'];
+			}else{
+				$_SESSION['numero']=$numero;
+			}
+
+			if($adresse==NULL){
+				$adresse=$_SESSION['id_adresse'];
+			}else{
+				$_SESSION['id_adresse']=$adresse;
+			}
+
+			if($password==NULL){
+				$password=isset($_POST["password2"])? $_POST["password2"] : "";
+			}
+			
+
+			// Variable connexion
+			$user = "root";
+			$mdp = "";
+			$addr = "localhost";
+
+			// Connect to MySQL server
+			$db_handle = mysqli_connect($addr,$user, $mdp);
+
+			if($db_handle) {
+					echo "Connected ! <br>";
+			} 
+			else {
+				die("Unable to connect. ERROR" . mysqli_error($db_handle));
+			}
+
+			$sql = "SET NAMES utf8";
+			$result = mysqli_query($db_handle, $sql);
+
+
+			$db_found = mysqli_select_db($db_handle, "ece-marketplace");
+
+			$id=$_SESSION['id'];
+			if($db_found){
+
+				$sql = "UPDATE user SET nom='$name' ,prenom='$firstname',mail='$mail',numero='$numero',mdp= '$password',adresse = '$adresse' WHERE id = '$id' ";
+				$result = mysqli_query($db_handle, $sql);
+				var_dump($sql);
+			}
+
+			mysqli_close($db_handle);
+
+			header('Location: votreCompte.php');
+			//exit();
+
+		}	
 
 ?>
 <!DOCTYPE html>
@@ -93,7 +161,34 @@ session_start();
 		<div class="section container">
 			<div class="row">
 				<div class="col">
-					<p>Pensez à vous connecter</p>
+					<form action="modifiercompte.php" method="post">
+					<img id="logoInscription" src="logoMarketPlace.png" alt="logo ECE Market Place">
+					<h1 id="titreInscription">modification</h1>
+					<table>
+						<tr>
+							<td><input type="text" name="firstname" class="form-control"  placeholder="Votre prénom"  size="50px"></td>
+						</tr>
+						<tr>
+							<td><input type="text" name="name" class="form-control"  placeholder="Votre nom" size="50px"></td>
+						</tr>
+						<tr>
+							<td><input type="mail" name="mail" class="form-control"  placeholder="Votre adresse mail" size="50px"></td>
+						</tr>
+						<tr>
+							<td><input type="number" name="num" class="form-control" placeholder="Votre numéro de téléphone" size="50"></td>
+						</tr>
+						<tr>
+							<td><input type="password" name="password" class="form-control"  placeholder="Votre mot de passe" size="50px"></td>
+						</tr>
+						<tr>
+							<td><input type="text" name="adress" class="form-control"  placeholder="Votre adresse" size="50px"></td>
+						</tr>
+						<tr>
+						<td><input type="password" name="password2" class="form-control" required="required" placeholder="verification de votre mot de passe" size="50px"></td>
+						</tr>
+					</table>
+					<button id="inscrire" class="btn btn-primary" type="submit">modifier</button>
+				</form>	
 				</div>
 			</div>
 			<div class="row">

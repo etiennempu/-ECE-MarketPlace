@@ -1,18 +1,6 @@
 <?php
 // On démarre la session AVANT d'écrire du code HTML
 session_start();
-	if($_SESSION['type']==1)
-	{
-		header("location: compteClient.php");
-
-	}elseif ($_SESSION['type']==2) 
-	{
-		header("location: compteVendeur.php");
-	}elseif ($_SESSION['type']==3) 
-	{
-		header("location: compteAdmin.php");
-	}
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -93,7 +81,94 @@ session_start();
 		<div class="section container">
 			<div class="row">
 				<div class="col">
-					<p>Pensez à vous connecter</p>
+					<form action="votreCompte.php" method="post">
+						 <p><?php echo "Bonjour ".$_SESSION['prenom']." ".$_SESSION['nom']." vous trouverez ici les information relative à votre Compte.<br>"; ?>
+						 	c'est ici que vous pouvez modifier votre compte et accéder à votre historique.
+						 </p>
+						
+						 <?php  
+						 	if($_SERVER["REQUEST_METHOD"] == "POST") 
+								
+								{
+										$id=$_SESSION['id'];
+											// Variable connexion
+										$user = "root";
+										$mdp = "";
+										$addr = "localhost";
+
+										// Connect to MySQL server
+										$db_handle = mysqli_connect($addr,$user, $mdp);
+
+											if($db_handle)
+											{
+												
+											}else 
+											{
+												die("Unable to connect. ERROR" . mysqli_error($db_handle));
+											}
+
+											$sql = "SET NAMES utf8";
+											$result = mysqli_query($db_handle, $sql);
+
+
+											$db_found = mysqli_select_db($db_handle, "ece-marketplace");
+
+										if($db_found)
+										{
+											$sql = "SELECT * FROM `historique` WHERE id_client='$id' or id_vendeur='$id' ";
+												
+
+												$result = mysqli_query($db_handle, $sql);
+												
+												$data=mysqli_fetch_assoc($result);
+												
+												if($data!=NULL)
+												{
+
+													echo "<h2>Votre Historique:</h2>";
+													
+													echo "<table border=\"1\">";
+													echo "<tr>";
+													//echo "<th>" . "ID" . "</th>";
+													echo "<th>" . "Nom de l'articles" . "</th>";
+													echo "<th>" . "dates de vente" . "</th>";
+													echo "<th>" . "prix de vente" . "</th>";
+													echo "<th>" . "Achat de " . "</th>";
+													echo "<th>" . "a" . "</th>";
+													echo "</tr>";
+														 do{
+															
+															echo "<tr>";
+															//echo "<td>" . $data['id'] . "</td>";
+															echo "<td>" . $data['Nom_articles'] . "</td>";
+															echo "<td>" . $data['dates de vents'] . "</td>";
+															echo "<td>" . $data['prix de ventes'] . "</td>";
+															echo "<td>" . $data['Nom_client'] . "</td>";
+															echo "<td>" . $data['Nom_vendeur'] . "</td>";
+															echo "</tr>";
+														}while ($data = mysqli_fetch_assoc($result));
+													echo "</table>";
+													mysqli_close($db_handle);
+														
+												}
+												else
+												{
+													
+													echo "<script>alert(\"auncun historique\")</script>";
+													header('Location: votreCompte.php');
+
+												}
+										}
+										else 
+										{
+											echo "DB not found <br>";
+										}
+								}
+		
+						 ?>
+						 <button id="retourcompte" class="btn btn-primary" type="submit">Retourner sur votre Compte</button>	 
+					</form>	
+
 				</div>
 			</div>
 			<div class="row">

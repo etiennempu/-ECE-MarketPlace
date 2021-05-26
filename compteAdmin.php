@@ -1,18 +1,6 @@
 <?php
 // On démarre la session AVANT d'écrire du code HTML
 session_start();
-	if($_SESSION['type']==1)
-	{
-		header("location: compteClient.php");
-
-	}elseif ($_SESSION['type']==2) 
-	{
-		header("location: compteVendeur.php");
-	}elseif ($_SESSION['type']==3) 
-	{
-		header("location: compteAdmin.php");
-	}
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -93,7 +81,8 @@ session_start();
 		<div class="section container">
 			<div class="row">
 				<div class="col">
-					<p>Pensez à vous connecter</p>
+					<!-- <h1>SECTION</h1> -->
+					<!-- <p><?php echo $_SESSION['prenom']." ".$_SESSION['nom']." ".$_SESSION['id']; ?></p> -->
 				</div>
 			</div>
 			<div class="row">
