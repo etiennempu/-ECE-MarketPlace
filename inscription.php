@@ -1,7 +1,6 @@
 <?php  
 		if($_SERVER["REQUEST_METHOD"] == "POST") {
 
-			echo "je suis rentre fdp <br>";
 			$firstname = isset($_POST["firstname"])? $_POST["firstname"] : ""; 
 			$name = isset($_POST["name"])? $_POST["name"] : "";
 			$mail = isset($_POST["mail"])? $_POST["mail"] : "";
@@ -21,7 +20,6 @@
 			$db_handle = mysqli_connect($addr,$user, $mdp);
 
 			if($db_handle) {
-					echo "Connected ! <br>";
 			} 
 			else {
 				die("Unable to connect. ERROR" . mysqli_error($db_handle));
@@ -33,9 +31,13 @@
 
 			$db_found = mysqli_select_db($db_handle, "ece-marketplace");
 
+			$sql = "SELECT * FROM user WHERE mail='$mail'";
+			$result = mysqli_query($db_handle, $sql);
+
 
 			if($db_found){
 				$sql = "INSERT INTO user (nom, prenom, mail, numero, mdp, type, photo, id_adresse) VALUES ('$name', '$firstname', '$mail', '$numero', '$password', 1, '0', '$adresse')";
+
 				$result = mysqli_query($db_handle, $sql);
 				echo $result;
 			}
@@ -43,6 +45,7 @@
 
 			header('Location: index.php');
 			exit();
+			}
 
 		}	
 ?>
