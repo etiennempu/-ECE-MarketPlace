@@ -27,9 +27,25 @@ td{
 	font-family: Bahnschrift;
 }
 
+#titreConnexion {
+	margin-left: 31%;
+	padding-top: 100px;
+	padding-bottom: 30px;
+	color: #2F5597;
+	font-family: Bahnschrift;
+}
+
 #inscrire {
 	background-color: #00B0F0;
-	margin-left: 270px;
+	margin-left: 36%;
+	font-family: Segoe UI Black;
+	margin-top: 20px;
+	border-style: none;
+}
+
+#connecter {
+	background-color: #00B0F0;
+	margin-left: 35%;
 	font-family: Segoe UI Black;
 	margin-top: 20px;
 	border-style: none;
@@ -60,13 +76,16 @@ td{
 	font-size: 1.5em;
 	height: 40px;
 	color: lightgrey;
+	margin-left: 5px;
 	padding-left: 5px;
+	border-left: solid lightgrey;
 }
 #prenom {
 	padding-bottom: 10px;
 	margin-top: 45px;
 	font-size: 1.5em;
 	color: lightgrey;
+
 }#nom {
 	padding-bottom: 10px;
 	margin-top: 45px;
@@ -76,11 +95,13 @@ td{
 }
 #deconnexion{
 	padding-bottom: 10px;
+	margin-left: 5px;
 	margin-top: 40px;
 	font-size: 1.5em;
 	height: 40px;
 	color: lightgrey;
 	padding-left: 5px;
+	border-left: solid lightgrey;
 	}
 
 #categorie {

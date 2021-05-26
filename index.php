@@ -38,10 +38,10 @@ $_SESSION['mes_articles']= [];
 		<div class="header container">
 			<div class="row">	
 		<!--LOGO-->
-				<div class="col-7">
+				<div class="col-9">
 					<a href="index.php"><img id="logo" src="logoMarketPlace.png" alt="logo ECE Market Place"></a>
 				</div>
-				<div class="col-5">
+				<div class="col-3">
 						<?php 
 							function initiales($nom){
                                    $nom_initiale = ''; // déclare le recipient

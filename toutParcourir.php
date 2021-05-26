@@ -18,10 +18,10 @@ session_start();
 		<div class="header container">
 			<div class="row">	
 		<!--LOGO-->
-				<div class="col-7">
+				<div class="col-9">
 					<a href="index.php"><img id="logo" src="logoMarketPlace.png" alt="logo ECE Market Place"></a>
 				</div>
-				<div class="col-5">
+				<div class="col-3">
 						<?php 
 							function initiales($nom){
                                    $nom_initiale = ''; // déclare le recipient
@@ -32,7 +32,6 @@ session_start();
                                    return strtoupper($nom_initiale);
                                    }
 							if($_SESSION['id']!=0){
-
 								echo '<label id="prenom">'.initiales($_SESSION['prenom']) .' </label>';
 								echo '<label id="nom">'.initiales($_SESSION['nom']) .'</label>';
 								echo '<a href="deconnexion.php"><label id="deconnexion">Deconnexion</label></a>';

@@ -86,7 +86,7 @@
 			<div class="col">
 				<form action="connexion.php" method="post">
 					<img id="logoInscription" src="logoMarketPlace.png" alt="logo ECE Market Place">
-					<h1 id="titreInscription">CONNEXION</h1>
+					<h1 id="titreConnexion">CONNEXION</h1>
 					<table>
 						<tr>
 							<td><input type="mail" name="mail" class="form-control" required="required" placeholder="Votre adresse mail" size="50px"></td>
@@ -95,7 +95,7 @@
 							<td><input type="password" name="password" class="form-control" required="required" placeholder="Votre mot de passe" size="50px"></td>
 						</tr>
 					</table>
-					<button id="connexion" class="btn btn-primary" type="submit">CONNEXION</button>
+					<button id="connecter" class="btn btn-primary" type="submit">SE CONNECTER</button>
 				</form>				
 			</div>
 			<div class="fondInscription col">
