@@ -1,6 +1,17 @@
 <?php
-// On démarre la session AVANT d'écrire du code HTML
-session_start();
+	// On démarre la session AVANT d'écrire du code HTML
+	session_start();
+	if($_SESSION['type']==1)
+    {
+        header("location: ToutParcourirAcheteur.php");
+
+    }elseif ($_SESSION['type']==2) 
+    {
+        header("location: ToutParcourirVendeur.php");
+    }elseif ($_SESSION['type']==3) 
+    {
+        header("location: ToutParcourirAdmin.php");
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -78,27 +89,6 @@ session_start();
 
 		<!--SECTION-->
 		<div class="section container">
-		<!--BARRE DE RECHERCHE-->
-			<div class="searchBar row">
-				<div class="col">
-					<form>
-						<fieldset>
-							<input id="categorieValeur" type="hidden" value="0"/>
-							<div class="input-group-prepend">
-								<button id="categorie" class="btn btn-primary dropdown-toggle" type="button">Catégorie</button>
-								<div id="categorieListe" class="dropdown-menu">
-									<a class="dropdown-item" data-valeur="0" href="#">Catégorie</a>	
-									<a class="dropdown-item" data-valeur="1" href="#">...</a>				
-								</div class="recherche">
-									<input id="saisie" name="saisie" type="text" class="form-control" aria-label="Saisie de mots clés" placeholder="Mot(s) clé(s)" required="required">
-			        				<div class="input-group-append">
-			          				<button id="recherche" class="btn btn-primary" type="submit">Recherche</button>
-		        				</div>						
-							</div>
-						</fieldset>
-					</form>
-				</div>
-			</div>
 		</div>
 
 		<!--FOOTER-->
@@ -119,7 +109,7 @@ session_start();
 
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"><script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 </body>
 </html>
