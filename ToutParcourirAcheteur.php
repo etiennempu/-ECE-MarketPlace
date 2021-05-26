@@ -108,29 +108,17 @@
                         <fieldset>
                             <input id="categorieValeur" type="hidden" value="0"/>
                             <div class="input-group-prepend">
-                                <button id="categorie" class="btn btn-primary dropdown-toggle" type="button">Catégorie</button>
+                                <button id="categorie" class="btn btn-light btn-primary dropdown-toggle" aria-haspopup="true" aria-expanded="true" data-toggle="dropdown" type="button">Catégorie</button>
                                 <div id="categorieListe" class="dropdown-menu">
-                                    <a class="dropdown-item" data-valeur="0" href="#">Catégorie</a> 
-                                    <a class="dropdown-item" data-valeur="0" href="#">Achat Immédiat</a> 
-                                    <a class="dropdown-item" data-valeur="1" href="#">Achat Immédiat</a> 
-                                    <script>
-                                        $(document).ready(function(e){
-                                          // Boucler tous les hyperliens de la liste « oCategorieListe »
-                                          // Et capturer le l’événement « click »
-                                          $('#categorieListe').find('a').click(function(e) {
-                                            // Prévenir une action
-                                            e.preventDefault();
-                                            // Changer l’étiquette (label) de la liste pour le contenu du lien
-                                            $('#categorie').html($(this).html());
-                                            // Assigner la valeur de l’attribut « data-valeur » à l’élément caché (hidden) du formulaire « oCategorieValeur »
-                                            $('#categorieValeur').val($(this).attr("data-valeur"));
-                                          });
-                                        });
-                                    </script>             
+                                    <a class="dropdown-item" data-valeur="0" href="#">Aucune<span class="d-none d-sm-inline"> catégorie</span></a>
+                                    <div role="separator" class="dropdown-divider"></div> 
+                                    <a class="dropdown-item" data-valeur="1" href="#">Achat<span class="d-none d-sm-inline"> Immédiat</span></a> 
+                                    <a class="dropdown-item" data-valeur="2" href="#">Enchères</a> 
+                                    <a class="dropdown-item" data-valeur="3" href="#">Acheteur<span class="d-none d-sm-inline">-Vendeur</span></a>              
                                 </div class="recherche">
                                     <input id="saisie" name="saisie" type="text" class="form-control" aria-label="Saisie de mots clés" placeholder="Mot(s) clé(s)" required="required">
                                     <div class="input-group-append">
-                                    <button id="recherche" class="btn btn-primary" type="submit">Recherche</button>
+                                    <button id="recherche" class="btn btn-light btn-primary" type="submit">Recherche</button>
                                 </div>                      
                             </div>
                         </fieldset>
@@ -166,15 +154,12 @@
                                         echo "<td>".$_SESSION['type']."<td>";
                                         echo "<td>".$_SESSION['id_vendeur']."<td>";
                                         echo "<td>".$_SESSION['photo1']."<td>";
-                                        echo "<td>".$_SESSION['prix']."<td>";
+                                        echo "<td>".$_SESSION['prix']."€"."<td>";
                                         echo "<td>".$_SESSION['description']."<td>";
                                         echo "</tr>";
                                 }
                                 else {
-                                    echo "ça marche ap";               
-                                    //echo "<script>alert(\"erreur rentrez des champs valides\")</script>";
-                                    // header('Location: connexion.php');
-                                    //exit();
+                                    echo "ça marche ap";
                                 }
                             }
                             ?>
@@ -204,6 +189,27 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <script>
+        $(document).ready(function(e){
+        // Boucler tous les hyperliens de la liste « categorieListe »
+        // Et capturer le l’événement « click »
+        $('#categorieListe').find('a').click(function(e) {
+        // Prévenir une action
+        if($('#categorieListe').show()==false){
+            $('#categorieListe').show(true);
+        }else {
+            $('#categorieListe').show(false);
+        }
+        e.preventDefault();
+        // Changer l’étiquette (label) de la liste pour le contenu du lien
+        $('#categorie').html($(this).html());
+        // Assigner la valeur de l’attribut « data-valeur » à l’élément caché (hidden) du formulaire « categorieValeur »
+        $('#categorieValeur').val($(this).attr("data-valeur"));
+
+    });
+    });
+    </script>
 
 </body>
 </html>
