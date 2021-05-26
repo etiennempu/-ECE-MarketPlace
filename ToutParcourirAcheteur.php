@@ -21,8 +21,8 @@
             $result = mysqli_query($db_handle, $sql);
 
 
-            $db_found = mysqli_select_db($db_handle, "ece-marketplace");
-
+            $db_found = mysqli_select_db($db_handle, "ece-marketplace");            
+            
 ?>
 
 <!DOCTYPE html>
@@ -105,23 +105,25 @@
             <div class="searchBar row">
                 <div class="col">
                     <form>
-                        <fieldset>
-                            <input id="categorieValeur" type="hidden" value="0"/>
-                            <div class="input-group-prepend">
-                                <button id="categorie" class="btn btn-light btn-primary dropdown-toggle" aria-haspopup="true" aria-expanded="true" data-toggle="dropdown" type="button">Catégorie</button>
-                                <div id="categorieListe" class="dropdown-menu">
-                                    <a class="dropdown-item" data-valeur="0" href="#">Aucune<span class="d-none d-sm-inline"> catégorie</span></a>
-                                    <div role="separator" class="dropdown-divider"></div> 
-                                    <a class="dropdown-item" data-valeur="1" href="#">Achat<span class="d-none d-sm-inline"> Immédiat</span></a> 
-                                    <a class="dropdown-item" data-valeur="2" href="#">Enchères</a> 
-                                    <a class="dropdown-item" data-valeur="3" href="#">Acheteur<span class="d-none d-sm-inline">-Vendeur</span></a>              
-                                </div class="recherche">
-                                    <input id="saisie" name="saisie" type="text" class="form-control" aria-label="Saisie de mots clés" placeholder="Mot(s) clé(s)" required="required">
-                                    <div class="input-group-append">
-                                    <button id="recherche" class="btn btn-light btn-primary" type="submit">Recherche</button>
-                                </div>                      
-                            </div>
-                        </fieldset>
+                            <fieldset>
+                                <input id="categorieValeur" type="hidden" value="0"/>
+                                <div class="input-group-prepend">
+                                    <button id="categorie" class="btn btn-light btn-primary dropdown-toggle" onchange="this.form.submit()" aria-haspopup="true" aria-expanded="true" data-toggle="dropdown" type="button">Catégorie</button>
+                                    <div id="categorieListe" class="dropdown-menu">
+                                        <form id="myForm" action="ToutParcourirAcheteur.php" method="post">
+                                            <a class="dropdown-item" data-valeur="0" href="#"><label name="choix" onclick="document.getElementById('myForm').submit()">Aucune Catégorie</label></a>
+                                            <div role="separator" class="dropdown-divider"></div> 
+                                            <a class="dropdown-item" data-valeur="1" href="#"><label name="choix" onclick="document.getElementById('myForm').submit()">Achat Immédiat</label></a> 
+                                            <a class="dropdown-item" data-valeur="1" href="#"><label name="choix" onclick="document.getElementById('myForm').submit()">Enchères</label></a> 
+                                            <a class="dropdown-item" data-valeur="2" href="#"><label name="choix" onclick="document.getElementById('myForm').submit()">Acheteur-Vendeur</button></a>
+                                        </form>              
+                                    </div class="recherche">
+                                        <input id="saisie" name="saisie" type="text" class="form-control" aria-label="Saisie de mots clés" placeholder="Mot(s) clé(s)" required="required">
+                                        <div class="input-group-append">
+                                        <button id="recherche" class="btn btn-light btn-primary" type="submit">Recherche</button>
+                                    </div>                      
+                                </div>
+                            </fieldset>
                     </form>
                 </div>
             </div>
@@ -131,18 +133,26 @@
                       <thead class="thead-light">
                         <tbody>
                             <?php 
-                            $sql="SELECT MAX(id) FROM articles";
-                            $result = mysqli_query($db_handle, $sql);
+                            echo "hello1";
+                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                                echo "hello2";
+                                $choice = isset($_POST["choix"])? $_POST["choix"] : "";
 
-                            $data = mysqli_fetch_assoc($result);
-                            foreach ($data as $key => $value) {
-                                $id_max=$value;
-                            }
+                                echo $choice;
 
-                            for($i = 1; $i <= $id_max; $i++){
-                                $sql = "SELECT * FROM articles WHERE id = $i";
+                                $sql="SELECT MAX(id) FROM articles";
                                 $result = mysqli_query($db_handle, $sql);
-                                        
+
+                                $data = mysqli_fetch_assoc($result);
+                                foreach ($data as $key => $value) {
+                                    $id_max=$value;
+                                }
+
+                                for($i = 1; $i <= $id_max; $i++){
+                                
+                                $sql = "SELECT * FROM articles WHERE type = $choice AND id = $i";
+                                $result = mysqli_query($db_handle, $sql);
+                                var_dump($sql);    
                                 $data = mysqli_fetch_assoc($result);
                                 if($data!=NULL)
                                 {           
@@ -162,6 +172,8 @@
                                     echo "ça marche ap";
                                 }
                             }
+                            }
+                            
                             ?>
                           </tbody>
                       </thead>
@@ -196,6 +208,7 @@
         // Et capturer le l’événement « click »
         $('#categorieListe').find('a').click(function(e) {
         // Prévenir une action
+        // Montrer ou cacher la liste des categories
         if($('#categorieListe').show()==false){
             $('#categorieListe').show(true);
         }else {
