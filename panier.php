@@ -19,7 +19,7 @@ session_start();
 			<div class="row">	
 		<!--LOGO-->
 				<div class="col-9">
-					<a href="index.php"><img id="logo" src="logoMarketPlace.png" alt="logo ECE Market Place"></a>
+					<a href="accueil.php"><img id="logo" src="logoMarketPlace.png" alt="logo ECE Market Place"></a>
 				</div>
 				<div class="col-3">
 						<?php 
