@@ -43,10 +43,18 @@ $_SESSION['mes_articles']= [];
 				</div>
 				<div class="col-5">
 						<?php 
+							function initiales($nom){
+                                   $nom_initiale = ''; // déclare le recipient
+                                   $n_mot = explode(" ",$nom);
+                                foreach($n_mot as $lettre){
+                                        $nom_initiale .= $lettre{0};
+                                    }
+                                   return strtoupper($nom_initiale);
+                                   }
 							if($_SESSION['id']!=0){
 
-								echo '<label id="prenom">'.$_SESSION['prenom'] .' </label>';
-								echo '<label id="nom">'.$_SESSION['nom'] .'</label>';
+								echo '<label id="prenom">'.initiales($_SESSION['prenom']) .' </label>';
+								echo '<label id="nom">'.initiales($_SESSION['nom']) .'</label>';
 								echo '<a href="deconnexion.php"><label id="deconnexion">Deconnexion</label></a>';
 							}
 							else{
