@@ -15,7 +15,7 @@ $_SESSION['mail'] = ' ';
 $_SESSION['numero']=0;
 $_SESSION['type']=0;
 $_SESSION['photo']='adressepardefault';
-$_SESSION['id_adresse'] =0;
+$_SESSION['id_adresse'] =NULL;
 $_SESSION['mes_articles']= [];
 // $_SESSION['mes_articles'][]= new maClass();
 

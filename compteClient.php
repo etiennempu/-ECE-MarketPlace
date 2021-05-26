@@ -85,10 +85,10 @@ session_start();
 						 <p><?php 
 
 						 		echo "Bonjour ".$_SESSION['prenom']." ".$_SESSION['nom']." vous trouverez ici les information relative à votre Compte.<br>";
-						  		echo"Vous vous appelez ".$_SESSION['prenom']." ".$_SESSION['nom'].", votre mail est : ".$_SESSION['mail'].".<br>votre numero est le: ".$_SESSION['numero']."----:".$_SESSION['id_adresse']."--------.<br>";	
+						  		echo"Vous vous appelez ".$_SESSION['prenom']." ".$_SESSION['nom'].", votre mail est : ".$_SESSION['mail'].".<br>votre numero est le: ".$_SESSION['numero'].".<br>";	
 
 						  		
-						  		if($_SESSION['id_adresse'] !=0){
+						  		if($_SESSION['id_adresse'] !=NULL){
 
 						  			echo"votre adresse est: ".$_SESSION['id_adresse'];
 						  		}else{

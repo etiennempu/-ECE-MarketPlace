@@ -35,7 +35,7 @@
 
 
 			if($db_found){
-				$sql = "INSERT INTO user (nom, prenom, mail, numero, mdp, type, photo, adresse) VALUES ('$name', '$firstname', '$mail', '$numero', '$password', 1, '0', '$adresse')";
+				$sql = "INSERT INTO user (nom, prenom, mail, numero, mdp, type, photo, id_adresse) VALUES ('$name', '$firstname', '$mail', '$numero', '$password', 1, '0', '$adresse')";
 				$result = mysqli_query($db_handle, $sql);
 				echo $result;
 			}

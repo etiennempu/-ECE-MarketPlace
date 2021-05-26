@@ -69,7 +69,7 @@ session_start();
 			$id=$_SESSION['id'];
 			if($db_found){
 
-				$sql = "UPDATE user SET nom='$name' ,prenom='$firstname',mail='$mail',numero='$numero',mdp= '$password',adresse = '$adresse' WHERE id = '$id' ";
+				$sql = "UPDATE user SET nom='$name' ,prenom='$firstname',mail='$mail',numero='$numero',mdp= '$password',id_adresse = '$adresse' WHERE id = '$id' ";
 				$result = mysqli_query($db_handle, $sql);
 				var_dump($sql);
 			}
