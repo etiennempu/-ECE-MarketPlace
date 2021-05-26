@@ -32,20 +32,22 @@
 			$db_found = mysqli_select_db($db_handle, "ece-marketplace");
 
 			$sql = "SELECT * FROM user WHERE mail='$mail'";
-			$result = mysqli_query($db_handle, $sql);
+            $result = mysqli_query($db_handle, $sql);
 
+            if($db_found){
+            if(mysqli_fetch_assoc($result)!=NULL){
+                echo "<script>alert('Ce compte existe déjà')</script>";
+            } else {
+	     	    $sql = "INSERT INTO user (nom, prenom, mail, numero, mdp, type, photo, id_adresse) VALUES ('$name', '$firstname', '$mail', '$numero', '$password', 1, '0', '0')";
+	            $result = mysqli_query($db_handle, $sql);
+	            echo $result;
 
-			if($db_found){
-				$sql = "INSERT INTO user (nom, prenom, mail, numero, mdp, type, photo, id_adresse) VALUES ('$name', '$firstname', '$mail', '$numero', '$password', 1, '0', '$adresse')";
+				mysqli_close($db_handle);
 
-				$result = mysqli_query($db_handle, $sql);
-				echo $result;
+				header('Location: index.php');
+				exit();
 			}
-			mysqli_close($db_handle);
-
-			header('Location: index.php');
-			exit();
-			}
+		}
 
 		}	
 ?>
