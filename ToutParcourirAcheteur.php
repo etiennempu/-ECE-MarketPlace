@@ -139,7 +139,7 @@
                                 $choice = isset($_POST["categorie"])? $_POST["categorie"] : "";
 
 
-                                $sql="SELECT MAX(id) FROM articles";
+                                $sql="SELECT MAX(id_article) FROM articles";
                                 $result = mysqli_query($db_handle, $sql);
 
                                 $data = mysqli_fetch_assoc($result);
@@ -153,8 +153,7 @@
                                 for($i = 1; $i <= $id_max; $i++){
                             
                                 $sql = "SELECT * FROM articles WHERE type_article = $choice AND id_article = $i";
-                                $result = mysqli_query($db_handle, $sql);
-                                var_dump($sql);    
+                                $result = mysqli_query($db_handle, $sql);  
                                 $data = mysqli_fetch_assoc($result);
                                 if($data!=NULL)
                                 {           
@@ -176,7 +175,7 @@
                             }else {
                                 for($i = 1; $i <= $id_max; $i++){
                                 
-                                $sql = "SELECT * FROM articles WHERE id = $i";
+                                $sql = "SELECT * FROM articles WHERE id_article = $i";
                                 $result = mysqli_query($db_handle, $sql);    
                                 $data = mysqli_fetch_assoc($result);
                                 if($data!=NULL)
