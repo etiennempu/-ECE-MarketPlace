@@ -110,7 +110,7 @@
                       <thead class="thead-light">
                         <tbody>
                             <?php 
-                            $sql="SELECT MAX(id) FROM articles";
+                            $sql="SELECT MAX(id_article) FROM articles";
                             $result = mysqli_query($db_handle, $sql);
 
                             $data = mysqli_fetch_assoc($result);
@@ -123,7 +123,7 @@
                             for($i = $id_max; $i > $id_max-3; $i--)
                             {
                             	
-                                $sql = "SELECT * FROM articles WHERE id = $i";
+                                $sql = "SELECT * FROM articles WHERE id_article = $i";
                                 $result = mysqli_query($db_handle, $sql);
                                         
                                 $data = mysqli_fetch_assoc($result);
