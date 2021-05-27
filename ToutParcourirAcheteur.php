@@ -104,24 +104,27 @@
         <!--BARRE DE RECHERCHE-->
             <div class="searchBar row">
                 <div class="col">
-                    <form id="myForm" action="ToutParcourirAcheteur.php" method="post">
-                            <fieldset>
-                                <input id="categorieValeur" type="hidden" value="0"/>
-                                <div class="input-group-prepend">
-                                    <button id="categorie" class="btn btn-light btn-primary dropdown-toggle" aria-haspopup="true" aria-expanded="true" data-toggle="dropdown" type="button">Catégorie</button>
-                                    <div id="categorieListe" class="dropdown-menu">
-                                            <a class="dropdown-item" data-valeur="0" href="#" name="choix" onclick="document.getElementById('myForm').submit()"><label>Aucune Catégorie</label></a>
-                                            <div role="separator" class="dropdown-divider"></div> 
-                                            <a class="dropdown-item" data-valeur="1" href="#" name="choix" onclick="document.getElementById('myForm').submit()"><label>Achat Immédiat</label></a> 
-                                            <a class="dropdown-item" data-valeur="1" href="#" name="choix" onclick="document.getElementById('myForm').submit()"><label>Enchères</label></a> 
-                                            <a class="dropdown-item" data-valeur="2" href="#" name="choix" onclick="document.getElementById('myForm').submit()"><label>Acheteur-Vendeur</label></a> 
-                                    </div class="recherche">
-                                        <input id="saisie" name="saisie" type="text" class="form-control" aria-label="Saisie de mots clés" placeholder="Mot(s) clé(s)" required="required">
-                                        <div class="input-group-append">
-                                        <button id="recherche" class="btn btn-light btn-primary" type="submit">Recherche</button>
-                                    </div>                      
+                    <div class="container">
+                        <form action="ToutParcourirAcheteur.php" method="post">
+                            <fieldset>    
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <select onchange="this.form.submit()" id="categorie" name="categorie" class="custom-select bg-light text-dark">
+                                            <option value="4">Catégorie</option>
+                                            <option value="0">Aucune Catégorie</option>
+                                            <option value="1">Achat Immédiat</option>
+                                            <option value="2">Enchères</option>
+                                            <option value="3">Négociations</option>
+                                        </select>
+                                    </div>
+                                    <input id="saisie" name="saisie" type="text" class="form-control" aria-label="Saisie de mots clés" placeholder="Mot(s) clé(s)" required="required">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-light" id="recherche" type="submit">Recherche</button>
+                                    </div>
                                 </div>
-                            </fieldset>
+                        </fieldset> 
+                      </form>
+                    </div>
                     </form>
                 </div>
             </div>
@@ -131,12 +134,10 @@
                       <thead class="thead-light">
                         <tbody>
                             <?php 
-                            echo "hello1";
-                            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                                echo "hello2";
-                                $choice = isset($_POST["choix"])? $_POST["choix"] : "";
 
-                                echo $choice;
+                            if($_SERVER["REQUEST_METHOD"] == "POST") {
+                                $choice = isset($_POST["categorie"])? $_POST["categorie"] : "";
+
 
                                 $sql="SELECT MAX(id) FROM articles";
                                 $result = mysqli_query($db_handle, $sql);
@@ -146,11 +147,13 @@
                                     $id_max=$value;
                                 }
 
+                                if ($choice==1 || $choice==2 || $choice==3) {
+                                    
+
                                 for($i = 1; $i <= $id_max; $i++){
                                 
                                 $sql = "SELECT * FROM articles WHERE type_article = $choice AND id = $i";
-                                $result = mysqli_query($db_handle, $sql);
-                                var_dump($sql);    
+                                $result = mysqli_query($db_handle, $sql);    
                                 $data = mysqli_fetch_assoc($result);
                                 if($data!=NULL)
                                 {           
@@ -167,9 +170,34 @@
                                         echo "</tr>";
                                 }
                                 else {
-                                    echo "ça marche ap";
+                                }
+                                }
+                            }else {
+                                for($i = 1; $i <= $id_max; $i++){
+                                
+                                $sql = "SELECT * FROM articles WHERE id = $i";
+                                $result = mysqli_query($db_handle, $sql);    
+                                $data = mysqli_fetch_assoc($result);
+                                if($data!=NULL)
+                                {           
+                                    foreach($data as $key => $value) {    
+                                        $_SESSION["$key"]=$value;           
+                                    }   
+                                        echo "<tr>";                             
+                                        echo "<td>".$_SESSION['Nom']."<td>";
+                                        echo "<td>".$_SESSION['type_article']."<td>";
+                                        echo "<td>".$_SESSION['id_vendeur']."<td>";
+                                        echo "<td>".$_SESSION['photo1']."<td>";
+                                        echo "<td>".$_SESSION['prix']."€"."<td>";
+                                        echo "<td>".$_SESSION['description']."<td>";
+                                        echo "</tr>";
+                                }
+                                else {
+                                }
                                 }
                             }
+
+                                
                             }
                             
                             ?>
@@ -207,16 +235,15 @@
         $('#categorieListe').find('a').click(function(e) {
         // Prévenir une action
         // Montrer ou cacher la liste des categories
-        if($('#categorieListe').show()==false){
-            $('#categorieListe').show(true);
-        }else {
-            $('#categorieListe').show(false);
-        }
         e.preventDefault();
         // Changer l’étiquette (label) de la liste pour le contenu du lien
         $('#categorie').html($(this).html());
         // Assigner la valeur de l’attribut « data-valeur » à l’élément caché (hidden) du formulaire « categorieValeur »
         $('#categorieValeur').val($(this).attr("data-valeur"));
+
+        if ($('#categorie').attr("selected")=="selected") {
+
+        }
 
     });
     });
