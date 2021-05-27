@@ -151,9 +151,10 @@
                                     
 
                                 for($i = 1; $i <= $id_max; $i++){
-                                
-                                $sql = "SELECT * FROM articles WHERE type_article = $choice AND id = $i";
-                                $result = mysqli_query($db_handle, $sql);    
+                            
+                                $sql = "SELECT * FROM articles WHERE type_article = $choice AND id_article = $i";
+                                $result = mysqli_query($db_handle, $sql);
+                                var_dump($sql);    
                                 $data = mysqli_fetch_assoc($result);
                                 if($data!=NULL)
                                 {           

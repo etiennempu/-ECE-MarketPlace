@@ -81,8 +81,32 @@ session_start();
 		<div class="section container">
 			<div class="row">
 				<div class="col">
-					<!-- <h1>SECTION</h1> -->
-					<!-- <p><?php echo $_SESSION['prenom']." ".$_SESSION['nom']." ".$_SESSION['id']; ?></p> -->
+					<form action="historique.php" method="post">
+						 <p><?php 
+
+						 		echo "Bonjour ".$_SESSION['prenom']." ".$_SESSION['nom']." vous trouverez ici les information relative à votre Compte.<br>";
+						  		echo"Vous vous appelez ".$_SESSION['prenom']." ".$_SESSION['nom'].", votre mail est : ".$_SESSION['mail'].".<br>votre numero est le: ".$_SESSION['numero'].".<br>";	
+
+						  		
+						  		if($_SESSION['id_adresse'] !=NULL){
+
+						  			echo"votre adresse est: ".$_SESSION['id_adresse'];
+						  		}else{
+
+						  			echo "oublié pas de modifier votre compte pour renseigner votre adresse!";
+						  		}
+						  ?>	
+						  </p>
+
+						 <p>
+						 	c'est ici que vous pouvez modifier votre compte et accéder à votre historique.
+						 </p>
+						 <button id="historique" class="btn btn-primary" type="submit">Historique</button>
+					</form>
+					<form action="modifiercompte.php">
+					
+						 <button id="historique" class="btn btn-primary" type="submit">Modifier votre compte</button>
+					</form>			 
 				</div>
 			</div>
 			<div class="row">

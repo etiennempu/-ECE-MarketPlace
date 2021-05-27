@@ -110,7 +110,6 @@ session_start();
 											$sql = "SET NAMES utf8";
 											$result = mysqli_query($db_handle, $sql);
 
-
 											$db_found = mysqli_select_db($db_handle, "ece-marketplace");
 
 										if($db_found)
@@ -119,7 +118,6 @@ session_start();
 												
 
 												$result = mysqli_query($db_handle, $sql);
-												
 												$data=mysqli_fetch_assoc($result);
 												
 												if($data!=NULL)
@@ -142,7 +140,7 @@ session_start();
 															//echo "<td>" . $data['id'] . "</td>";
 															echo "<td>" . $data['Nom_articles'] . "</td>";
 															echo "<td>" . $data['dates de vents'] . "</td>";
-															echo "<td>" . $data['prix de ventes'] . "</td>";
+															echo "<td>" . $data['prix de ventes'] . "€</td>";
 															echo "<td>" . $data['Nom_client'] . "</td>";
 															echo "<td>" . $data['Nom_vendeur'] . "</td>";
 															echo "</tr>";
