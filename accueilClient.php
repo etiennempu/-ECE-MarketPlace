@@ -134,7 +134,7 @@
                                     }   
                                         echo "<tr>";                             
                                         echo "<td>".$_SESSION['Nom']."<td>";
-                                        echo "<td>".$_SESSION['type']."<td>";
+                                        echo "<td>".$_SESSION['type_article']."<td>";
                                         echo "<td>".$_SESSION['id_vendeur']."<td>";
                                         echo "<td>".$_SESSION['photo1']."<td>";
                                         echo "<td>".$_SESSION['prix']."<td>";

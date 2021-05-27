@@ -104,19 +104,17 @@
         <!--BARRE DE RECHERCHE-->
             <div class="searchBar row">
                 <div class="col">
-                    <form>
+                    <form id="myForm" action="ToutParcourirAcheteur.php" method="post">
                             <fieldset>
                                 <input id="categorieValeur" type="hidden" value="0"/>
                                 <div class="input-group-prepend">
-                                    <button id="categorie" class="btn btn-light btn-primary dropdown-toggle" onchange="this.form.submit()" aria-haspopup="true" aria-expanded="true" data-toggle="dropdown" type="button">Catégorie</button>
+                                    <button id="categorie" class="btn btn-light btn-primary dropdown-toggle" aria-haspopup="true" aria-expanded="true" data-toggle="dropdown" type="button">Catégorie</button>
                                     <div id="categorieListe" class="dropdown-menu">
-                                        <form id="myForm" action="ToutParcourirAcheteur.php" method="post">
-                                            <a class="dropdown-item" data-valeur="0" href="#"><label name="choix" onclick="document.getElementById('myForm').submit()">Aucune Catégorie</label></a>
+                                            <a class="dropdown-item" data-valeur="0" href="#" name="choix" onclick="document.getElementById('myForm').submit()"><label>Aucune Catégorie</label></a>
                                             <div role="separator" class="dropdown-divider"></div> 
-                                            <a class="dropdown-item" data-valeur="1" href="#"><label name="choix" onclick="document.getElementById('myForm').submit()">Achat Immédiat</label></a> 
-                                            <a class="dropdown-item" data-valeur="1" href="#"><label name="choix" onclick="document.getElementById('myForm').submit()">Enchères</label></a> 
-                                            <a class="dropdown-item" data-valeur="2" href="#"><label name="choix" onclick="document.getElementById('myForm').submit()">Acheteur-Vendeur</button></a>
-                                        </form>              
+                                            <a class="dropdown-item" data-valeur="1" href="#" name="choix" onclick="document.getElementById('myForm').submit()"><label>Achat Immédiat</label></a> 
+                                            <a class="dropdown-item" data-valeur="1" href="#" name="choix" onclick="document.getElementById('myForm').submit()"><label>Enchères</label></a> 
+                                            <a class="dropdown-item" data-valeur="2" href="#" name="choix" onclick="document.getElementById('myForm').submit()"><label>Acheteur-Vendeur</label></a> 
                                     </div class="recherche">
                                         <input id="saisie" name="saisie" type="text" class="form-control" aria-label="Saisie de mots clés" placeholder="Mot(s) clé(s)" required="required">
                                         <div class="input-group-append">
@@ -150,7 +148,7 @@
 
                                 for($i = 1; $i <= $id_max; $i++){
                                 
-                                $sql = "SELECT * FROM articles WHERE type = $choice AND id = $i";
+                                $sql = "SELECT * FROM articles WHERE type_article = $choice AND id = $i";
                                 $result = mysqli_query($db_handle, $sql);
                                 var_dump($sql);    
                                 $data = mysqli_fetch_assoc($result);
@@ -161,7 +159,7 @@
                                     }   
                                         echo "<tr>";                             
                                         echo "<td>".$_SESSION['Nom']."<td>";
-                                        echo "<td>".$_SESSION['type']."<td>";
+                                        echo "<td>".$_SESSION['type_article']."<td>";
                                         echo "<td>".$_SESSION['id_vendeur']."<td>";
                                         echo "<td>".$_SESSION['photo1']."<td>";
                                         echo "<td>".$_SESSION['prix']."€"."<td>";
