@@ -1,10 +1,4 @@
 <?php
-// class articles{
-// 	id=0;
-// 	id_vendeur=0;
-
-// }
-// On démarre la session AVANT d'écrire du code HTML
 session_start();
 
 // On s'amuse à créer quelques variables de session dans $_SESSION
@@ -16,10 +10,16 @@ $_SESSION['numero']=0;
 $_SESSION['type']=0;
 $_SESSION['photo']='adressepardefault';
 $_SESSION['id_adresse'] =NULL;
-$_SESSION['mes_articles']= [];
-// $_SESSION['mes_articles'][]= new maClass();
-
-
+$_SESSION['mes_articles']=[];
+// $_SESSION['mes_articles'][0]= 1;
+// $var=count($_SESSION['mes_articles']);
+// echo $var ;
+// $_SESSION['mes_articles'][1]= 1;
+// $var=count($_SESSION['mes_articles']);
+// echo $var ;
+// $_SESSION['mes_articles'][2]= 1;
+// $var=count($_SESSION['mes_articles']);
+// echo $var ;
 ?>
 
 <!DOCTYPE html>
