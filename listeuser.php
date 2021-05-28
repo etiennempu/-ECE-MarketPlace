@@ -82,38 +82,98 @@ session_start();
 			<div class="row">
 				<div class="col">
 					
-						 <p><?php 
-
-						 		echo "Bonjour ".$_SESSION['prenom']." ".$_SESSION['nom']." vous trouverez ici les information relative à votre Compte.<br>";
-						  		echo"Vous vous appelez ".$_SESSION['prenom']." ".$_SESSION['nom'].", votre mail est : ".$_SESSION['mail'].".<br>votre numero est le: ".$_SESSION['numero'].".<br>";	
-
-						  		
-						  		if($_SESSION['id_adresse'] !=NULL){
-
-						  			echo"votre adresse est: ".$_SESSION['id_adresse'];
-						  		}else{
-
-						  			echo "oublié pas de modifier votre compte pour renseigner votre adresse!";
-						  		}
-						  ?>	
-						  </p>
-
-						 <p>
+						 <p><?php echo "Bonjour ".$_SESSION['prenom']." ".$_SESSION['nom']." vous trouverez ici les information relative à votre Compte.<br>"; ?>
 						 	c'est ici que vous pouvez modifier votre compte et accéder à votre historique.
 						 </p>
-					<form action="historique.php" method="post">
-						 <button id="historique" class="btn btn-primary" type="submit">Historique</button>
-					</form>
-					<form action="modifiercompte.php">
-					
-						 <button id="historique" class="btn btn-primary" type="submit">Modifier votre compte</button>
+						
+						 <?php  
+						 	if($_SERVER["REQUEST_METHOD"] == "POST") 
+								
+								{
+										$id=$_SESSION['id'];
+											// Variable connexion
+										$user = "root";
+										$mdp = "";
+										$addr = "localhost";
+
+										// Connect to MySQL server
+										$db_handle = mysqli_connect($addr,$user, $mdp);
+
+											if($db_handle)
+											{
+												
+											}else 
+											{
+												die("Unable to connect. ERROR" . mysqli_error($db_handle));
+											}
+
+											$sql = "SET NAMES utf8";
+											$result = mysqli_query($db_handle, $sql);
+
+											$db_found = mysqli_select_db($db_handle, "ece-marketplace");
+
+										if($db_found)
+										{
+											$sql = "SELECT * FROM `user`  ";
+												
+
+												$result = mysqli_query($db_handle, $sql);
+												$data=mysqli_fetch_assoc($result);
+												
+												if($data!=NULL)
+												{
+
+													echo "<h2>Liste des utilisateurs:</h2>";
+													
+													echo "<table border=\"1\">";
+													echo "<tr>";
+													echo "<th>" . "Suprimer" . "</th>";
+													echo "<th>" . "nom" . "</th>";
+													echo "<th>" . "prenomom" . "</th>";
+													echo "<th>" . "mail" . "</th>";
+													echo "<th>" . "numero" . "</th>";
+													echo "<th>" . "type" . "</th>";
+													echo "<th>" . "adresse" . "</th>";
+													echo "</tr>";
+
+														 do{
+															$temp=$data['id'];
+															echo "<tr>";
+															echo "<form action='suprimeruser.php' method='post'>";
+															echo "<td><button name= suprimer value=$temp class='btn btn-light' type='submit'>Supprimer</button></td>";
+															echo "</form>";
+															echo "<td>" . $data['nom'] . "</td>";
+															echo "<td>" . $data['prenom'] . "</td>";
+															echo "<td>" . $data['mail'] . "</td>";
+															echo "<td>" . $data['numero'] . "</td>";
+															echo "<td>" . $data['type'] . "</td>";
+															echo "<td>" . $data['id_adresse'] . "</td>";
+
+															echo "</tr>";
+														}while ($data = mysqli_fetch_assoc($result));
+													echo "</table>";
+													mysqli_close($db_handle);
+														
+												}
+												else
+												{
+													
+													echo "<script>alert(\"auncun historique\")</script>";
+													header('Location: votreCompte.php');
+
+												}
+										}
+										else 
+										{
+											echo "DB not found <br>";
+										}
+								}
+		
+						 ?>
+					<form action="votreCompte.php" method="post">
+						 <button id="retourcompte" class="btn btn-primary" type="submit">Retourner sur votre Compte</button>	 
 					</form>	
-					<form action="listeuser.php" method="post">
-						 <button id="listeuser" class="btn btn-primary" type="submit">afficher les users</button>
-					</form>	
-					<form action="ajoutervendeur.php">
-						 <button id="listeuser" class="btn btn-primary" type="submit">ajouter un vendeur</button>
-					</form>		 
+
 				</div>
 			</div>
 			<div class="row">
