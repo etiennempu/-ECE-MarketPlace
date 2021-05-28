@@ -22,6 +22,41 @@
 
             $db_found = mysqli_select_db($db_handle, "ece-marketplace");
 
+
+
+function make_slides($db_handle)
+{
+ $output = '';
+ $count = 0;
+ $sql = "SELECT * FROM articles ORDER BY id_article ASC";
+ $result = mysqli_query($db_handle, $sql);
+ $data = mysqli_fetch_assoc($result);
+ foreach ($data as $key => $value) 
+ {
+    $id_max=$value;
+ }
+ while($row = mysqli_fetch_array($result))
+ {
+  if($count == 0)
+  {
+   $output .= '<div class="item active">';
+  }
+  else
+  {
+   $output .= '<div class="item">';
+  }
+  $output .= '
+  	<img src="'.$row["photo1"].'" alt="'.$row["Nom"].'" />
+   <div class="carousel-caption">
+    <h3>'.$row["Nom"].'</h3>
+   </div>
+  </div>
+  ';
+  $count = $count + 1;
+ }
+ return $output;
+}
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -29,6 +64,9 @@
 	<title>index</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="stylesheet.css">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
@@ -102,66 +140,38 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<h1>SECTION</h1>
-					<p>Bonjour Admin :</p>
-					<div class="tableArticles row">
-                <div class="col">
-                    <table class="table">
-                      <thead class="thead-light">
-                        <tbody>
-                            <?php 
-                            $sql="SELECT MAX(id_article) FROM articles";
-                            $result = mysqli_query($db_handle, $sql);
+					
+					<p>Bonjour Administrateur, <br> Vous voici sur la page d'accueil de l'ECE Market Place, ce site permet d'acheter des articles en vente sur le site, de pouvoir faire une transaction vendeur-client sur un article pour négocier un prix acceptable entre le client et le vendeur mais également pour un client de mettre sa meilleur offre dans un item vendu par enchère.<br> 
+					Vous êtes ici sur la page d'accueil ou vous pouvez trouver une sélection du jour avec les articles mis en vente récemment ainsi que les best sellers du moment.</p>
+					<br />
+  <div class="container">
+   <h2> Sélection du Jour</h2>
+   <br />
+   <div id="dynamic_slide_show" class="carousel slide" data-ride="carousel">
+    
 
-                            $data = mysqli_fetch_assoc($result);
-                            foreach ($data as $key => $value) 
-                            {
-                                $id_max=$value;
-                            }
-                            
+    <div class="carousel-inner">
+     <?php echo make_slides($db_handle); ?>
+    </div>
+    <a class="left carousel-control" href="#dynamic_slide_show" data-slide="prev">
+     <span class="glyphicon glyphicon-chevron-left"></span>
+     <span class="sr-only">Previous</span>
+    </a>
 
-                            for($i = $id_max; $i > $id_max-3; $i--)
-                            {
-                            	
-                                $sql = "SELECT * FROM articles WHERE id_article = $i";
-                                $result = mysqli_query($db_handle, $sql);
-                                        
-                                $data = mysqli_fetch_assoc($result);
-                                if($data!=NULL)
-                                {           
-                                    foreach($data as $key => $value) {    
-                                        $_SESSION["$key"]=$value;           
-                                    }   
-                                        echo "<tr>";                             
-                                        echo "<td>".$_SESSION['Nom']."<td>";
-                                        echo "<td>".$_SESSION['type']."<td>";
-                                        echo "<td>".$_SESSION['id_vendeur']."<td>";
-                                        echo "<td>".$_SESSION['photo1']."<td>";
-                                        echo "<td>".$_SESSION['prix']."<td>";
-                                        echo "<td>".$_SESSION['description']."<td>";
-                                        echo "</tr>";
-                                }
-                                else 
-                                {
-                                    echo "ERROR";               
-                                    //echo "<script>alert(\"erreur rentrez des champs valides\")</script>";
-                                    // header('Location: connexion.php');
-                                    //exit();
-                                }
-                            }
-                            ?>
-                          </tbody>
-                      </thead>
-                    </table>
-                </div>
-            </div>
-        </div>
+    <a class="right carousel-control" href="#dynamic_slide_show" data-slide="next">
+     <span class="glyphicon glyphicon-chevron-right"></span>
+     <span class="sr-only">Next</span>
+    </a>
+
+   </div>
+  </div>
 
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
-					<h1>FOOTER</h1>
+					<div id="footer"><br>Copyright &copy; 2021 ECE Market Place, 01 39 94 53 71, 6 rue Saint Augustin Paris 75002<br>
+						<a href="mailto:Ece.marketplace@gmail.com">Ece.marketplace@gmail.com<a/>
 				</div>
 			</div>
 		</div>

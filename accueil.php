@@ -92,12 +92,13 @@ if($_SESSION['type']==1)
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<h1>SECTION</h1>
+					<h1>Bonjour connectez-vous pour avoir accès aux informations sur cette page.</h1>
+					
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
-					<h1>FOOTER</h1>
+					
 				</div>
 			</div>
 		</div>
