@@ -36,5 +36,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     mysqli_close($db_handle);
     }
-    header('Location: ToutParcourirVendeur.php');
+    if($_SESSION['type']==2) {
+        header('Location: ToutParcourirVendeur.php');
+    }
+    elseif ($_SESSION['type']==3) {
+        header('Location: ToutParcourirAdmin.php');
+    }
+        
 ?>
