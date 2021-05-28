@@ -127,10 +127,19 @@
                                     foreach($data as $key => $value) {    
                                         $_SESSION["$key"]=$value;           
                                     }   
+
+                                    if($_SESSION['type_article']==1){
+                                        $type_article = "Achat Immédiat";
+                                    }
+                                    elseif($_SESSION['type_article']==2){
+                                        $type_article = "Enchères";
+                                    }
+                                    elseif($_SESSION['type_article']==3){
+                                        $type_article = "Négociations";
+                                    }
                                         echo "<tr>";                             
                                         echo "<td>".$_SESSION['Nom']."</td>";
-                                        echo "<td>".$_SESSION['type_article']."</td>";
-                                        echo "<td>".$_SESSION['id_vendeur']."</td>";
+                                        echo "<td>".$type_article."</td>";
                                         echo "<td>".$_SESSION['photo1']."</td>";
                                         echo "<td>".$_SESSION['prix']."€"."</td>";
                                         echo "<td>".$_SESSION['description']."</td>";
