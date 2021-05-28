@@ -172,6 +172,8 @@
                                             $nom_vendeur=$value;           
                                         }
 
+                                        $id_article = $_SESSION['id_article'];
+
                                         if($_SESSION['type_article']==1){
                                             $type_article = "Achat Immédiat";
                                         }
@@ -183,12 +185,15 @@
                                         }
 
                                         echo "<tr>";                             
-                                        echo "<td>".$_SESSION['Nom']."<td>";
-                                        echo "<td>".$type_article."<td>";
-                                        echo "<td>".$nom_vendeur."<td>";
-                                        echo "<td>".$_SESSION['photo1']."<td>";
-                                        echo "<td>".$_SESSION['prix']."€"."<td>";
-                                        echo "<td>".$_SESSION['description']."<td>";
+                                        echo "<td>".$_SESSION['Nom']."</td>";
+                                        echo "<td>".$type_article."</td>";
+                                        echo "<td>".$nom_vendeur."</td>";
+                                        echo "<td>".$_SESSION['photo1']."</td>";
+                                        echo "<td>".$_SESSION['prix']."€"."</td>";
+                                        echo "<td>".$_SESSION['description']."</td>";
+                                        echo "<form action='voirArticle.php' method='post'>";
+                                        echo "<td><button class='btn btn-light' name='voirPlus' value = $id_article type='submit'>voir plus</button></td>";
+                                        echo "</form>";
                                         echo "</tr>";
                                 }
                                 else {
@@ -220,6 +225,8 @@
                                             $nom_vendeur=$value;           
                                         }
 
+                                        $id_article = $_SESSION['id_article'];
+
                                         if($_SESSION['type_article']==1){
                                             $type_article = "Achat Immédiat";
                                         }
@@ -237,6 +244,9 @@
                                         echo "<td>".$_SESSION['photo1']."</td>";
                                         echo "<td>".$_SESSION['prix']."€"."</td>";
                                         echo "<td>".$_SESSION['description']."</td>";
+                                        echo "<form action='voirArticle.php' method='post'>";
+                                        echo "<td><button class='btn btn-light' name='voirPlus' value = $id_article type='submit'>voir plus</button></td>";
+                                        echo "</form>";
                                         echo "</tr>";
                                 }
                                 else {

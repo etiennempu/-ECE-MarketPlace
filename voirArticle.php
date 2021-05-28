@@ -21,7 +21,32 @@
             $result = mysqli_query($db_handle, $sql);
 
 
-            $db_found = mysqli_select_db($db_handle, "ece-marketplace");            
+            $db_found = mysqli_select_db($db_handle, "ece-marketplace");  
+
+            if($_SERVER["REQUEST_METHOD"] == "POST") { 
+                $id_article = isset($_POST["voirPlus"])? $_POST["voirPlus"] : ""; 
+
+                $sql = "SELECT * FROM articles WHERE id_article = $id_article";
+                $result = mysqli_query($db_handle, $sql);
+                                        
+                $data = mysqli_fetch_assoc($result);
+
+                if($data!=NULL){           
+                    foreach($data as $key => $value) {    
+                        $_data["$key"]=$value;           
+                    }
+                    $nom_article=$_data['Nom'];
+                    $photo1=$_data['photo1'];
+                    $photo2=$_data['photo2'];
+                    $photo3=$_data['photo3'];
+                    $video=$_data['video'];
+                    $type_article=$_data['type_article'];
+                    $prix_article=$_data['prix'];
+                    $description_article=$_data['description'];
+
+                }
+
+            }         
             
 ?>
 
@@ -31,6 +56,7 @@
     <title>index</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+    <link rel="stylesheet" href="bootstrap-gallery.css">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
@@ -82,7 +108,7 @@
                                 <a class="nav-link" href="accueil.php"><img src="accueil.png" alt="bouton Accueil"></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="toutParcourir.php"><img src="toutParcourirSelect.png" alt="bouton Tout Parcourir"></a>
+                                <a class="nav-link" href="toutParcourir.php"><img src="toutParcourir.png" alt="bouton Tout Parcourir"></a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="notifications.php"><img src="notifs.png" alt="bouton Notifications"></a>
@@ -101,66 +127,47 @@
 
         <!--SECTION-->
         <div class="section container">
-            <div class="tableArticles row">
+            <div class="row">
                 <div class="col">
-                    <table class="table">
-                      <thead class="thead-light">
-                        <tbody>
-                            <?php 
-
-                                $id_vendeur = $_SESSION['id'];
-
-                                $sql="SELECT MAX(id_article) FROM articles WHERE id_vendeur = $id_vendeur";
-                                $result = mysqli_query($db_handle, $sql);
-                                $data = mysqli_fetch_assoc($result);
-                                foreach ($data as $key => $value) {
-                                    $id_max=$value;
-                                }
-                                    
-                                for($i = 1; $i <= $id_max; $i++){
-                            
-                                $sql = "SELECT * FROM articles WHERE id_article = $i AND id_vendeur = $id_vendeur";
-                                $result = mysqli_query($db_handle, $sql);  
-                                $data = mysqli_fetch_assoc($result);
-
-                                if($data!=NULL)
-                                {           
-                                    foreach($data as $key => $value) {    
-                                        $_SESSION["$key"]=$value;           
-                                    }   
-
-                                    $id_article = $_SESSION['id_article'];
-
-                                    if($_SESSION['type_article']==1){
-                                        $type_article = "Achat Immédiat";
-                                    }
-                                    elseif($_SESSION['type_article']==2){
-                                        $type_article = "Enchères";
-                                    }
-                                    elseif($_SESSION['type_article']==3){
-                                        $type_article = "Négociations";
-                                    }
-                                        echo "<tr>";                             
-                                        echo "<td>".$_SESSION['Nom']."</td>";
-                                        echo "<td>".$type_article."</td>";
-                                        echo "<td>".$_SESSION['photo1']."</td>";
-                                        echo "<td>".$_SESSION['prix']."€"."</td>";
-                                        echo "<td>".$_SESSION['description']."</td>";
-                                        echo "<form action='supprimerArticle.php' method='post'>";
-                                        echo "<td><button class='btn btn-light' name='supprimer' value = $id_article type='submit'>Supprimer</button></td>";
-                                        echo "</form>";
-                                        echo "</tr>";
-                                }
-                                }
-                            ?>
-                            <tr>
-                                <form action='ajouterArticle.php'>
-                                    <td><button class='btn btn-light' type='submit'>Ajouter</button></td>
-                                </form>
-                            </tr>
-                          </tbody>
-                      </thead>
-                    </table>
+                    <?php  
+                        echo "<h1>$nom_article</h1>";
+                        echo " <div class='col-xs-3'>";
+                        echo "<a href='toutParcourir.png' class='thumbnail'>
+                                <img src='toutParcourir.png' alt='Image 1'/></a>";
+                        echo "</div>";
+                        echo " <div class='col-xs-3'>";
+                        echo "<a href='panier.png' class='thumbnail'>
+                                <img src='panier.png' alt='Image 2'/></a>";
+                        echo "</div>";
+                        echo " <div class='col-xs-3'>";
+                        echo "<a href='accueil.png' class='thumbnail'>
+                                <img src='accueil.png' alt='Image 3'/></a>";
+                        echo "</div>";
+                    ?> 
+                </div>
+                <div class="col" style="border-left: solid lightgrey">
+                    <?php  
+                        echo "<h2>Prix: ".$prix_article."€</h2>";
+                        echo "<h2>Description:</h2>";
+                        echo "<p>$description_article</p>";
+                        if ($type_article==1) {
+                            echo "<button id='inscrire' class='btn btn-primary' type='submit'>AJOUTER AU PANIER</button>";
+                        }
+                        elseif($type_article==2){
+                            echo "<button id='inscrire' class='btn btn-primary' type='submit'>ENCHERIR</button>";
+                        }
+                        elseif($type_article==3){
+                            echo "<button id='inscrire' class='btn btn-primary' type='submit'>NEGOCIER</button>";
+                        }
+                    ?> 
                 </div>
             </div>
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"      crossorigin="anonymous"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
