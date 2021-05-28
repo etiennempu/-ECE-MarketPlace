@@ -160,10 +160,22 @@
                                     foreach($data as $key => $value) {    
                                         $_SESSION["$key"]=$value;           
                                     }   
+
+                                    $id_vendeur = $_SESSION['id_vendeur'];
+                                    $sql = "SELECT nom FROM user WHERE id = $id_vendeur";
+                                    $result = mysqli_query($db_handle, $sql);
+                                        
+                                    $data = mysqli_fetch_assoc($result);
+                                    if($data!=NULL)
+                                    {           
+                                        foreach($data as $key => $value) {    
+                                            $nom_vendeur=$value;           
+                                        }
+
                                         echo "<tr>";                             
                                         echo "<td>".$_SESSION['Nom']."<td>";
                                         echo "<td>".$_SESSION['type_article']."<td>";
-                                        echo "<td>".$_SESSION['id_vendeur']."<td>";
+                                        echo "<td>".$nom_vendeur."<td>";
                                         echo "<td>".$_SESSION['photo1']."<td>";
                                         echo "<td>".$_SESSION['prix']."€"."<td>";
                                         echo "<td>".$_SESSION['description']."<td>";
@@ -172,6 +184,8 @@
                                 else {
                                 }
                                 }
+
+                            }
                             }else {
                                 for($i = 1; $i <= $id_max; $i++){
                                 
@@ -183,22 +197,34 @@
                                     foreach($data as $key => $value) {    
                                         $_SESSION["$key"]=$value;           
                                     }   
+
+                                    $id_vendeur = $_SESSION['id_vendeur'];
+                                    $sql = "SELECT nom FROM user WHERE id = $id_vendeur";
+                                    $result = mysqli_query($db_handle, $sql);
+                                        
+                                    $data = mysqli_fetch_assoc($result);
+
+                                    if($data!=NULL)
+                                    {           
+                                        foreach($data as $key => $value) {    
+                                            $nom_vendeur=$value;           
+                                        }
+
                                         echo "<tr>";                             
-                                        echo "<td>".$_SESSION['Nom']."<td>";
-                                        echo "<td>".$_SESSION['type_article']."<td>";
-                                        echo "<td>".$_SESSION['id_vendeur']."<td>";
-                                        echo "<td>".$_SESSION['photo1']."<td>";
-                                        echo "<td>".$_SESSION['prix']."€"."<td>";
-                                        echo "<td>".$_SESSION['description']."<td>";
+                                        echo "<td>".$_SESSION['Nom']."</td>";
+                                        echo "<td>".$_SESSION['type_article']."</td>";
+                                        echo "<td>".$nom_vendeur."</td>";
+                                        echo "<td>".$_SESSION['photo1']."</td>";
+                                        echo "<td>".$_SESSION['prix']."€"."</td>";
+                                        echo "<td>".$_SESSION['description']."</td>";
                                         echo "</tr>";
                                 }
                                 else {
                                 }
                                 }
                             }
-
-                                
                             }
+                        }
                             
                             ?>
                           </tbody>
