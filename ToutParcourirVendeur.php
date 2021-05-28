@@ -122,11 +122,14 @@
                                 $sql = "SELECT * FROM articles WHERE id_article = $i AND id_vendeur = $id_vendeur";
                                 $result = mysqli_query($db_handle, $sql);  
                                 $data = mysqli_fetch_assoc($result);
+
                                 if($data!=NULL)
                                 {           
                                     foreach($data as $key => $value) {    
                                         $_SESSION["$key"]=$value;           
                                     }   
+
+                                    $id_article = $_SESSION['id_article'];
 
                                     if($_SESSION['type_article']==1){
                                         $type_article = "Achat Immédiat";
@@ -143,11 +146,18 @@
                                         echo "<td>".$_SESSION['photo1']."</td>";
                                         echo "<td>".$_SESSION['prix']."€"."</td>";
                                         echo "<td>".$_SESSION['description']."</td>";
-                                        echo "<td><button class='btn btn-light' type='submit'>Supprimer</button></td>";
+                                        echo "<form action='supprimerArticle.php' method='post'>";
+                                        echo "<td><button class='btn btn-light' name='supprimer' value = $id_article type='submit'>Supprimer</button></td>";
+                                        echo "</form>";
                                         echo "</tr>";
                                 }
                                 }
                             ?>
+                            <tr>
+                                <form action='ajouterArticle.php'>
+                                    <td><button class='btn btn-light' type='submit'>Ajouter</button></td>
+                                </form>
+                            </tr>
                           </tbody>
                       </thead>
                     </table>
