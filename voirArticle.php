@@ -56,6 +56,7 @@
     <title>index</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+    <link rel="stylesheet" href="bootstrap-gallery.css">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
@@ -130,14 +131,25 @@
                 <div class="col">
                     <?php  
                         echo "<h1>$nom_article</h1>";
-                        echo "PHOTOS ICI";
-                        echo "<h2>Description:</h2>";
-                        echo "<p>$description_article</p>";
+                        echo " <div class='col-xs-3'>";
+                        echo "<a href='toutParcourir.png' class='thumbnail'>
+                                <img src='toutParcourir.png' alt='Image 1'/></a>";
+                        echo "</div>";
+                        echo " <div class='col-xs-3'>";
+                        echo "<a href='panier.png' class='thumbnail'>
+                                <img src='panier.png' alt='Image 2'/></a>";
+                        echo "</div>";
+                        echo " <div class='col-xs-3'>";
+                        echo "<a href='accueil.png' class='thumbnail'>
+                                <img src='accueil.png' alt='Image 3'/></a>";
+                        echo "</div>";
                     ?> 
                 </div>
-                <div class="col">
+                <div class="col" style="border-left: solid lightgrey">
                     <?php  
                         echo "<h2>Prix: ".$prix_article."€</h2>";
+                        echo "<h2>Description:</h2>";
+                        echo "<p>$description_article</p>";
                         if ($type_article==1) {
                             echo "<button id='inscrire' class='btn btn-primary' type='submit'>AJOUTER AU PANIER</button>";
                         }
@@ -151,3 +163,11 @@
                 </div>
             </div>
         </div>
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"      crossorigin="anonymous"></script>
+
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+</html>
