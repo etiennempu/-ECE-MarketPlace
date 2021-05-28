@@ -21,7 +21,32 @@
             $result = mysqli_query($db_handle, $sql);
 
 
-            $db_found = mysqli_select_db($db_handle, "ece-marketplace");            
+            $db_found = mysqli_select_db($db_handle, "ece-marketplace");  
+
+            if($_SERVER["REQUEST_METHOD"] == "POST") { 
+                $id_article = isset($_POST["voirPlus"])? $_POST["voirPlus"] : ""; 
+
+                $sql = "SELECT * FROM articles WHERE id_article = $id_article";
+                $result = mysqli_query($db_handle, $sql);
+                                        
+                $data = mysqli_fetch_assoc($result);
+
+                if($data!=NULL){           
+                    foreach($data as $key => $value) {    
+                        $_data["$key"]=$value;           
+                    }
+                    $nom_article=$_data['Nom'];
+                    $photo1=$_data['photo1'];
+                    $photo2=$_data['photo2'];
+                    $photo3=$_data['photo3'];
+                    $video=$_data['video'];
+                    $type_article=$_data['type_article'];
+                    $prix_article=$_data['prix'];
+                    $description_article=$_data['description'];
+
+                }
+
+            }         
             
 ?>
 
@@ -96,5 +121,33 @@
                         </ul>
                     </div>
                 </nav>
+            </div>
+        </div>
+
+        <!--SECTION-->
+        <div class="section container">
+            <div class="row">
+                <div class="col">
+                    <?php  
+                        echo "<h1>$nom_article</h1>";
+                        echo "PHOTOS ICI";
+                        echo "<h2>Description:</h2>";
+                        echo "<p>$description_article</p>";
+                    ?> 
+                </div>
+                <div class="col">
+                    <?php  
+                        echo "<h2>Prix: ".$prix_article."€</h2>";
+                        if ($type_article==1) {
+                            echo "<button id='inscrire' class='btn btn-primary' type='submit'>AJOUTER AU PANIER</button>";
+                        }
+                        elseif($type_article==2){
+                            echo "<button id='inscrire' class='btn btn-primary' type='submit'>ENCHERIR</button>";
+                        }
+                        elseif($type_article==3){
+                            echo "<button id='inscrire' class='btn btn-primary' type='submit'>NEGOCIER</button>";
+                        }
+                    ?> 
+                </div>
             </div>
         </div>
