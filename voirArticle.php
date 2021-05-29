@@ -45,22 +45,7 @@
 
                 }
 
-            }  
-
-            $sql ="SELECT * FROM enchere WHERE id_articles = $id_article";
-            $result = mysqli_query($db_handle, $sql);
-            $data = mysqli_fetch_assoc($result);
-
-            if($data!=NULL){           
-                foreach($data as $key => $value) {    
-                $_enchere["$key"]=$value;           
-            }
-
-            $prix_article=$_enchere['prix_max'];
-        }
-
-
-            
+            }              
 ?>
 
 <!DOCTYPE html>
@@ -69,6 +54,9 @@
     <title>index</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, user-scalable=no">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="bootstrap-gallery.css">
     <link rel="stylesheet" type="text/css" href="stylesheet.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -142,13 +130,69 @@
         <!--SECTION-->
         <div class="section container">
             <div class="row">
-                <div class="col">
+                <div class="col-6">
                     <?php  
                          echo "<h1>$nom_article</h1>";
                     ?>
+                        <div id="dynamic_slide_show" class="carousel slide" data-ride="carousel">
+                            
+
+                            <div class="carousel-inner">
+                             <?php 
+
+                             for($i=1; $i<=3; $i++) { 
+                                if($i == 1){
+                                    echo "<div class='item'><img src=".$photo3." alt='photo3'/></div>";
+                                    echo "<div class='item'><img src=".$photo2." alt='photo2'/></div>";
+                                    echo "<div class='item active'><img src=".$photo1." alt='photo1'/></div>";
+                                }
+                                elseif($i == 2){
+                                    echo "<div class='item'><img src=".$photo1." alt='photo1'/></div>";
+                                    echo "<div class='item'><img src=".$photo3." alt='photo3'/></div>";
+                                    echo "<div class='item active'><img src=".$photo2." alt='photo2'/></div>";
+                                }
+                                elseif($i == 3){
+                                    echo "<div class='item'><img src=".$photo2." alt='photo2'/></div>";
+                                    echo "<div class='item'><img src=".$photo2." alt='photo1'/></div>";
+                                    echo "<div class='item active'><img src=".$photo3." alt='photo3'/></div>";
+                                }
+                                
+                            }
+                             ?>
+                            </div>
+                            <a class="left carousel-control" href="#dynamic_slide_show" data-slide="prev">
+                             <span class="glyphicon glyphicon-chevron-left"></span>
+                             <span class="sr-only">Previous</span>
+                            </a>
+
+                            <a class="right carousel-control" href="#dynamic_slide_show" data-slide="next">
+                             <span class="glyphicon glyphicon-chevron-right"></span>
+                             <span class="sr-only">Next</span>
+                            </a>
+
+                        </div>
                 </div>
-                <div class="col" style="border-left: solid lightgrey">
+                <div class="col-6" style="border-left: solid lightgrey">
                     <?php  
+
+                    if ($type_article==2) {
+                        $sql ="SELECT * FROM enchere WHERE id_articles = $id_article";
+                        $result = mysqli_query($db_handle, $sql);
+                        $data = mysqli_fetch_assoc($result);
+                        $_enchere = [];
+
+                        if($data!=NULL){          
+                            foreach($data as $key => $value) {    
+                                $_enchere["$key"]=$value;           
+                            }
+                        }
+
+                        $prix_article=$_enchere['prix_max'];
+                        $date_de_fin = $_enchere['date_fin'];
+                        echo "<h3>Date de fin d'enchère: ".$date_de_fin."</h3>";
+                    }
+                   
+
                         echo "<h2>Prix: ".$prix_article."€</h2>";
                         echo "<h2>Description:</h2>";
                         echo "<p>$description_article</p>";
