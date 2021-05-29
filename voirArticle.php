@@ -195,7 +195,7 @@
 
                         echo "<h2>Prix: ".$prix_article."€</h2>";
                         echo "<h2>Description:</h2>";
-                        echo "<p>$description_article</p>";
+                        echo "<p>$description_article</p><br>";
                         if ($type_article==1) {
                             echo "<button id='inscrire' class='btn btn-primary' type='submit'>AJOUTER AU PANIER</button>";
                         }
@@ -206,8 +206,31 @@
                             echo "</form>";
                         }
                         elseif($type_article==3){
-                            echo "<button id='inscrire' class='btn btn-primary' type='submit'>NEGOCIER</button>";
-                            echo "<button id='inscrire' class='btn btn-primary' type='submit'>AJOUTER AU PANIER</button>";
+                            $sql = "SELECT compteur FROM negociation WHERE id_articles = $id_article";
+                            $result = mysqli_query($db_handle, $sql);
+
+                            $data = mysqli_fetch_assoc($result);
+
+                            if ($data!=NULL) {
+                                foreach ($data as $key => $value) {
+                                $nego_cpt = $value;    
+                            }
+
+
+                            }else {
+                                $nego_cpt = 0;
+                            }
+                            
+                            if ($nego_cpt < 10) {
+                                echo "<form action='negociation.php', method='post'>";
+                                echo "<input type='number' name='prix_nego' class='form-control' required='required' placeholder='Votre Negociation'  size='20px'>";
+                                echo "<button id='inscrire' class='btn btn-primary' name='negociation' value='$id_article' type='submit'>NEGOCIER</button>";
+                                echo "</form>";
+                                echo "<button id='inscrire' class='btn btn-primary' type='submit'>AJOUTER AU PANIER</button>";
+                            }else {
+                                echo "<button id='inscrire' class='btn btn-primary' type='submit'>AJOUTER AU PANIER</button>";
+                            }
+                            
                         }
                         
                     ?> 
