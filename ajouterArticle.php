@@ -1,6 +1,7 @@
 <?php
 // On démarre la session AVANT d'écrire du code HTML
 session_start();
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $nom_article = isset($_POST["nomArticle"])? $_POST["nomArticle"] : ""; 
@@ -40,12 +41,30 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     {
         $sql = "INSERT INTO articles (id_vendeur, type_article, Nom, prix, photo1, photo2, photo3, video, description) VALUES ('$id_vendeur', '$type_article', '$nom_article', '$prix', '', '', '', '', '$description')";
         $result = mysqli_query($db_handle, $sql);
+
+        if ($type_article==2) {
+            $sql="SELECT MAX(id_article) FROM articles";
+            $result = mysqli_query($db_handle, $sql);
+
+            $data=mysqli_fetch_assoc($result);
+            foreach ($data as $key => $value) {
+                $id_max=$value;
+            }
+            echo $id_max;
+        }
+
+        $date_actuelle = date('Y-m-d H:i:s');
+        $demain = date('Y-m-d H:i:s', strtotime('+1 day'));
+
+        $sql = "INSERT INTO enchere (id_articles, id_clientmax, prix_max, prix_inf, date_debut, date_fin) VALUES ('$id_max', '0', '$prix', '0', '$date_actuelle', '$demain')";
+        $result = mysqli_query($db_handle, $sql);
         var_dump($result);
+
 
         mysqli_close($db_handle);
 
-        header('Location: ToutParcourirVendeur.php');
-        exit();
+        //header('Location: ToutParcourirVendeur.php');
+        //exit();
 
         
     }

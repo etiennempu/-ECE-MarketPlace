@@ -28,7 +28,6 @@
 
                 $sql = "SELECT * FROM articles WHERE id_article = $id_article";
                 $result = mysqli_query($db_handle, $sql);
-                                        
                 $data = mysqli_fetch_assoc($result);
 
                 if($data!=NULL){           
@@ -46,7 +45,21 @@
 
                 }
 
-            }         
+            }  
+
+            $sql ="SELECT * FROM enchere WHERE id_articles = $id_article";
+            $result = mysqli_query($db_handle, $sql);
+            $data = mysqli_fetch_assoc($result);
+
+            if($data!=NULL){           
+                foreach($data as $key => $value) {    
+                $_enchere["$key"]=$value;           
+            }
+
+            $prix_article=$_enchere['prix_max'];
+        }
+
+
             
 ?>
 
@@ -61,6 +74,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
+
     <div class="wrapper container-fluid">
 
         <!--HEADER-->
@@ -130,20 +144,8 @@
             <div class="row">
                 <div class="col">
                     <?php  
-                        echo "<h1>$nom_article</h1>";
-                        echo " <div class='col-xs-3'>";
-                        echo "<a href='toutParcourir.png' class='thumbnail'>
-                                <img src='toutParcourir.png' alt='Image 1'/></a>";
-                        echo "</div>";
-                        echo " <div class='col-xs-3'>";
-                        echo "<a href='panier.png' class='thumbnail'>
-                                <img src='panier.png' alt='Image 2'/></a>";
-                        echo "</div>";
-                        echo " <div class='col-xs-3'>";
-                        echo "<a href='accueil.png' class='thumbnail'>
-                                <img src='accueil.png' alt='Image 3'/></a>";
-                        echo "</div>";
-                    ?> 
+                         echo "<h1>$nom_article</h1>";
+                    ?>
                 </div>
                 <div class="col" style="border-left: solid lightgrey">
                     <?php  
@@ -154,11 +156,16 @@
                             echo "<button id='inscrire' class='btn btn-primary' type='submit'>AJOUTER AU PANIER</button>";
                         }
                         elseif($type_article==2){
-                            echo "<button id='inscrire' class='btn btn-primary' type='submit'>ENCHERIR</button>";
+                            echo "<form action = 'enchere.php' method ='post'>";
+                            echo "<input type='number' name='prix_enchere' class='form-control' required='required' placeholder='Votre enchère'  size='20px'>";
+                            echo "<button id='inscrire' name='id_article' class='btn btn-primary' value='$id_article' type='submit'>ENCHERIR</button>";
+                            echo "</form>";
                         }
                         elseif($type_article==3){
                             echo "<button id='inscrire' class='btn btn-primary' type='submit'>NEGOCIER</button>";
+                            echo "<button id='inscrire' class='btn btn-primary' type='submit'>AJOUTER AU PANIER</button>";
                         }
+                        
                     ?> 
                 </div>
             </div>
