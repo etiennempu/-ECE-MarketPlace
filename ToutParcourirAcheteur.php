@@ -188,7 +188,6 @@
                                         echo "<td>".$_SESSION['Nom']."</td>";
                                         echo "<td>".$type_article."</td>";
                                         echo "<td>".$nom_vendeur."</td>";
-                                        echo "<td>".$_SESSION['photo1']."</td>";
                                         echo "<td>".$_SESSION['prix']."€"."</td>";
                                         echo "<td>".$_SESSION['description']."</td>";
                                         echo "<form action='voirArticle.php' method='post'>";
@@ -241,7 +240,6 @@
                                         echo "<td>".$_SESSION['Nom']."</td>";
                                         echo "<td>".$type_article."</td>";
                                         echo "<td>".$nom_vendeur."</td>";
-                                        echo "<td>".$_SESSION['photo1']."</td>";
                                         echo "<td>".$_SESSION['prix']."€"."</td>";
                                         echo "<td>".$_SESSION['description']."</td>";
                                         echo "<form action='voirArticle.php' method='post'>";

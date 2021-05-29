@@ -8,6 +8,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $type_article = isset($_POST["type"])? $_POST["type"] : "0";
     $prix = isset($_POST["prix"])? $_POST["prix"] : "0";
     $description = isset($_POST["description"])? $_POST["description"] : "";
+    $photo1 = isset($_POST["photo1"])? $_POST["photo1"] : "";
+    $photo2 = isset($_POST["photo2"])? $_POST["photo2"] : "";
+    $photo3 = isset($_POST["photo3"])? $_POST["photo3"] : "";
     $id_vendeur = $_SESSION['id'];
 
     echo $nom_article."<br>";
@@ -39,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if($db_found)
     {
-        $sql = "INSERT INTO articles (id_vendeur, type_article, Nom, prix, photo1, photo2, photo3, video, description) VALUES ('$id_vendeur', '$type_article', '$nom_article', '$prix', '', '', '', '', '$description')";
+        $sql = "INSERT INTO articles (id_vendeur, type_article, Nom, prix, photo1, photo2, photo3, video, description) VALUES ('$id_vendeur', '$type_article', '$nom_article', '$prix', '$photo1', '$photo2', '$photo3', '', '$description')";
         $result = mysqli_query($db_handle, $sql);
 
         if ($type_article==2) {
@@ -97,6 +100,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         </tr>
                         <tr>
                             <td><input type="number" name="prix" class="form-control" required="required" placeholder="Le prix" size="50px"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="photo1" class="form-control" placeholder="URL de la photo" size="50px"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="photo2" class="form-control" placeholder="URL de la photo" size="50px"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="photo3" class="form-control" placeholder="URL de la photo" size="50px"></td>
                         </tr>
                         <tr>
                             <td><input type="text" name="description" class="form-control" placeholder="Description de l'article" size="50px"></td>
