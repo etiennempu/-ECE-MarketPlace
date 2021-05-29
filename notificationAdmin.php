@@ -1,17 +1,7 @@
 <?php
 // On démarre la session AVANT d'écrire du code HTML
 session_start();
-	if($_SESSION['type']==1)
-	{
-		header("location: notificationClient.php");
 
-	}elseif ($_SESSION['type']==2) 
-	{
-		header("location: notificationVendeur.php");
-	}elseif ($_SESSION['type']==3) 
-	{
-		header("location: notificationAdmin.php");
-	}
 ?>
 <!DOCTYPE html>
 <html>
