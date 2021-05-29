@@ -1,12 +1,16 @@
 <?php
 // On démarre la session AVANT d'écrire du code HTML
 session_start();
+
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $nom_article = isset($_POST["nomArticle"])? $_POST["nomArticle"] : ""; 
     $type_article = isset($_POST["type"])? $_POST["type"] : "0";
     $prix = isset($_POST["prix"])? $_POST["prix"] : "0";
     $description = isset($_POST["description"])? $_POST["description"] : "";
+    $photo1 = isset($_POST["photo1"])? $_POST["photo1"] : "";
+    $photo2 = isset($_POST["photo2"])? $_POST["photo2"] : "";
+    $photo3 = isset($_POST["photo3"])? $_POST["photo3"] : "";
     $id_vendeur = $_SESSION['id'];
 
     echo $nom_article."<br>";
@@ -38,14 +42,32 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if($db_found)
     {
-        $sql = "INSERT INTO articles (id_vendeur, type_article, Nom, prix, photo1, photo2, photo3, video, description) VALUES ('$id_vendeur', '$type_article', '$nom_article', '$prix', '', '', '', '', '$description')";
+        $sql = "INSERT INTO articles (id_vendeur, type_article, Nom, prix, photo1, photo2, photo3, video, description) VALUES ('$id_vendeur', '$type_article', '$nom_article', '$prix', '$photo1', '$photo2', '$photo3', '', '$description')";
+        $result = mysqli_query($db_handle, $sql);
+
+        if ($type_article==2) {
+            $sql="SELECT MAX(id_article) FROM articles";
+            $result = mysqli_query($db_handle, $sql);
+
+            $data=mysqli_fetch_assoc($result);
+            foreach ($data as $key => $value) {
+                $id_max=$value;
+            }
+            echo $id_max;
+        }
+
+        $date_actuelle = date('Y-m-d H:i:s');
+        $demain = date('Y-m-d H:i:s', strtotime('+1 day'));
+
+        $sql = "INSERT INTO enchere (id_articles, id_clientmax, prix_max, prix_inf, date_debut, date_fin) VALUES ('$id_max', '0', '$prix', '0', '$date_actuelle', '$demain')";
         $result = mysqli_query($db_handle, $sql);
         var_dump($result);
+
 
         mysqli_close($db_handle);
 
         header('Location: ToutParcourirVendeur.php');
-        exit();
+        //exit();
 
         
     }
@@ -78,6 +100,15 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
                         </tr>
                         <tr>
                             <td><input type="number" name="prix" class="form-control" required="required" placeholder="Le prix" size="50px"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="photo1" class="form-control" placeholder="URL de la photo" size="50px"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="photo2" class="form-control" placeholder="URL de la photo" size="50px"></td>
+                        </tr>
+                        <tr>
+                            <td><input type="text" name="photo3" class="form-control" placeholder="URL de la photo" size="50px"></td>
                         </tr>
                         <tr>
                             <td><input type="text" name="description" class="form-control" placeholder="Description de l'article" size="50px"></td>

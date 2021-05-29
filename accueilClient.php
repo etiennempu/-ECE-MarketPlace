@@ -28,7 +28,7 @@ function make_slides($db_handle)
 {
  $output = '';
  $count = 0;
- $sql = "SELECT * FROM articles ORDER BY id_article ASC";
+ $sql = "SELECT * FROM articles ORDER BY id_articles ASC";
  $result = mysqli_query($db_handle, $sql);
  $data = mysqli_fetch_assoc($result);
  foreach ($data as $key => $value) 
@@ -49,6 +49,42 @@ function make_slides($db_handle)
   	<img src="'.$row["photo1"].'" alt="'.$row["Nom"].'" />
    <div class="carousel-caption">
     <h3>'.$row["Nom"].'</h3>
+   </div>
+  </div>
+  ';
+  $count = $count + 1;
+ }
+ return $output;
+}
+
+function make_slides_sellers($db_handle)
+{
+ $output = '';
+ $count = 0;
+ $sql = "SELECT historique.id_article, historique.id_historique, historique.Nom_articles, articles.id_articles, articles.photo1 
+         FROM historique, articles 
+         WHERE articles.id_articles = historique.id_article 
+         ORDER BY id_historique ASC";
+ $result = mysqli_query($db_handle, $sql);
+ $data = mysqli_fetch_assoc($result);
+ foreach ($data as $key => $value) 
+ {
+    $id_max=$value;
+ }
+ while($row = mysqli_fetch_array($result))
+ {
+  if($count == 0)
+  {
+   $output .= '<div class="item active">';
+  }
+  else
+  {
+   $output .= '<div class="item">';
+  }
+  $output .= '
+  	<img src="'.$row["photo1"].'" alt="'.$row["Nom_articles"].'" />
+   <div class="carousel-caption">
+    <h3>'.$row["Nom_articles"].'</h3>
    </div>
   </div>
   ';
@@ -152,6 +188,28 @@ function make_slides($db_handle)
 
     <div class="carousel-inner">
      <?php echo make_slides($db_handle); ?>
+    </div>
+    <a class="left carousel-control" href="#dynamic_slide_show" data-slide="prev">
+     <span class="glyphicon glyphicon-chevron-left"></span>
+     <span class="sr-only">Previous</span>
+    </a>
+
+    <a class="right carousel-control" href="#dynamic_slide_show" data-slide="next">
+     <span class="glyphicon glyphicon-chevron-right"></span>
+     <span class="sr-only">Next</span>
+    </a>
+
+   </div>
+  </div>
+
+  <div class="container">
+   <h2> Ventes</h2>
+   <br />
+   <div id="dynamic_slide_show" class="carousel slide" data-ride="carousel">
+    
+
+    <div class="carousel-inner">
+     <?php echo make_slides_sellers($db_handle); ?>
     </div>
     <a class="left carousel-control" href="#dynamic_slide_show" data-slide="prev">
      <span class="glyphicon glyphicon-chevron-left"></span>
