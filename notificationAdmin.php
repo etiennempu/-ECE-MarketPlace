@@ -2,6 +2,7 @@
 // On démarre la session AVANT d'écrire du code HTML
 session_start();
 
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -82,12 +83,163 @@ session_start();
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<h1>Pensez à vous connecter</h1>
+					<h2>C'est ici que vous avez le suivi de vos negociation avec les clients</h2>
+					<?php 
+							$id_vendeur=$_SESSION['id'];
+									// Variable connexion
+								$user = "root";
+								$mdp = "";
+								$addr = "localhost";
+
+								// Connect to MySQL server
+								$db_handle = mysqli_connect($addr,$user, $mdp);
+
+									if($db_handle)
+									{
+										
+									}else 
+									{
+										die("Unable to connect. ERROR" . mysqli_error($db_handle));
+									}
+
+									$sql = "SET NAMES utf8";
+									$result = mysqli_query($db_handle, $sql);
+
+
+									$db_found = mysqli_select_db($db_handle, "ece-marketplace");
+
+								if($db_found)
+								{
+									
+										
+										$sql = "SELECT * FROM negociation WHERE vendeur_id='$id_vendeur' ";
+										
+										$result = mysqli_query($db_handle, $sql);
+										$data = mysqli_fetch_assoc($result);
+										$temp2=0;
+										$negociation=[];
+										if($data!=NULL)
+										{
+											
+												
+												do{
+												foreach($data as $key => $value)
+												{
+						
+															$negociation["$temp2"]=$value;
+															$temp2=$temp2+1;		
+												}
+												}while ($data = mysqli_fetch_assoc($result));
+
+												
+										}
+										
+										
+										mysqli_close($db_handle);
+										//echo "connection closed. <br>";
+								}
+								else 
+								{
+									echo "DB not found <br>";
+								}
+								//---------------------negoc-----------------------	
+						
+								//echo $enchere['$temp']. "<br>";
+							if($temp2>0 ){
+								
+								echo "Voici vos negociations en cours:";
+								echo "<table border=\'1\'>";
+								// echo "<tr>";
+								// echo "<th>" ."Voici vos negociations en cours:". "</th>";
+								// echo "</tr>";
+								echo "<tr>";
+
+								//echo "<th>" . "ID" . "</th>";
+								echo "<th>" . "Votre proposition" . "</th>";
+								echo "<th>" . "Proposition du client" . "</th>";
+								echo "<th>" . "évolution de la négosiation" . "</th>";
+								echo "<th>" . "votre offre" . "</th>";
+								echo "<th>" . "soumettre" . "</th>";
+								echo "</tr>";
+								
+								for($i=0;$i<$temp2;$i=$i+7){
+									echo "<tr>";
+									$t1=$i+4;
+									$t2=$i+3;
+									$t3=$i+5;
+									$t4=$i+1;
+									$t5=$i;
+									$t6=$i+6;
+
+									$idnegociation= $negociation["$t5"];
+									echo "<td>" . $negociation["$t1"] . "€</td>";
+									echo "<td>" . $negociation["$t2"] . "€</td>";
+									echo "<td>" . $negociation["$t3"] . "/9</td>";
+									echo "<form action='notificationVendeur.php' method='post'>";
+									echo "<td>"."<input type='number' name='offre' class='form-control' required='required'placeholder='proposition' size='10px'>"."</td>";
+									if($negociation["$t3"]==1|| $negociation["$t3"]==3 ||$negociation["$t3"]==5||$negociation["$t3"]==7||$negociation["$t3"]==9){
+										echo "<td>" ."<button name='submit' class='btn btn-primary' type='submit' value='$idnegociation'>soumettre </button>". "</td>";
+									}
+									echo"</form>";
+									echo "</tr>";
+										if($_SERVER["REQUEST_METHOD"] == "POST") {
+											
+										$offre = isset($_POST["offre"])? $_POST["offre"] : "0"; 
+										$id= $negociation["$t6"];
+										$compteur=$negociation["$t3"]+1;
+										$id_article=$negociation["$t4"];
+										// Variable connexion
+										$user = "root";
+										$mdp = "";
+										$addr = "localhost";
+
+										// Connect to MySQL server
+										$db_handle = mysqli_connect($addr,$user, $mdp);
+
+										if($db_handle) {
+										} 
+										else {
+											die("Unable to connect. ERROR" . mysqli_error($db_handle));
+										}
+
+										$sql = "SET NAMES utf8";
+										$result = mysqli_query($db_handle, $sql);
+
+
+										$db_found = mysqli_select_db($db_handle, "ece-marketplace");
+
+										
+
+							            if($db_found){
+							           
+							           		$sql = "UPDATE negociation SET dernier_prix_vendeur = '$offre', compteur = '$compteur' WHERE id_articles = '$id_article' AND vendeur_id = '$id'";
+								            $result = mysqli_query($db_handle, $sql);
+								            //var_dump($result) ;
+								            //echo $id_article." : ".$id." : ".$offre." : ".$compteur;
+
+											mysqli_close($db_handle);
+
+											header('Location: notificationVendeur.php');
+											exit();
+										
+									}
+
+									}	
+
+
+								}
+								echo "</table>";
+							}
+							else{
+								echo "vous avez aucune négosiation en cour<br>";
+							}	
+
+								?>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
-					<h1>FOOTER</h1>
+					
 				</div>
 			</div>
 		</div>

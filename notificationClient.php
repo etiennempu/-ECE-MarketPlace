@@ -393,7 +393,7 @@
 								echo "<th>" . "plus d'info sûr l'article" . "</th>";
 								echo "</tr>";
 								
-								for($i=0;$i<$temp2;$i=$i+6){
+								for($i=0;$i<$temp2;$i=$i+7){
 									echo "<tr>";
 									$t1=$i+4;
 									$t2=$i+3;
