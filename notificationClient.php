@@ -115,11 +115,12 @@
 										
 										$result = mysqli_query($db_handle, $sql);
 										$data = mysqli_fetch_assoc($result);
+										$temp=0;
+										$enchere=[];
 										if($data!=NULL)
 										{
 											
-												$temp=0;
-												$enchere=[];
+												
 												do{
 												foreach($data as $key => $value)
 												{
@@ -140,11 +141,12 @@
 										
 										$result = mysqli_query($db_handle, $sql);
 										$data = mysqli_fetch_assoc($result);
+										$temp2=0;
+										$negociation=[];
 										if($data!=NULL)
 										{
 											
-												$temp2=0;
-												$negociation=[];
+												
 												do{
 												foreach($data as $key => $value)
 												{
@@ -155,6 +157,32 @@
 															// echo $key." : ".$enchere[0]."<br>";
 															//echo $temp."<br>";
 															$temp2=$temp2+1;		
+												}
+												}while ($data = mysqli_fetch_assoc($result));
+
+												
+										}
+										
+										$sql= "SELECT * FROM notifications WHERE id_client='$id_client' ";
+
+										$result = mysqli_query($db_handle, $sql);
+										$data = mysqli_fetch_assoc($result);
+										$temp6=0;
+										$notifications=[];
+										if($data!=NULL)
+										{
+											
+												
+												do{
+												foreach($data as $key => $value)
+												{
+						
+															$notifications["$temp6"]=$value;
+															//echo $key." : ".$value."<br>";	 
+															// echo $key." : ".$enchere["$temp"]."<br>";
+															// echo $key." : ".$enchere[0]."<br>";
+															//echo $temp."<br>";
+															$temp6=$temp6+1;		
 												}
 												}while ($data = mysqli_fetch_assoc($result));
 
@@ -327,7 +355,7 @@
 										echo "<td>" . $enchere["$t3"] . "€</td>";
 										echo "<td>" . $enchere["$t5"] . "</td>";
 										echo "<td>" . $enchere["$t6"] . "</td>";
-										echo "<td>" . "</td>";
+										echo "<td>" . "<button name='negoc' class='btn btn-primary' type='submit' value=". $enchere["$t1"].">voir plus: </button>". "</td>";
 										echo "<td>" ."l'enchère n'est pas finie"."</td>";
 										echo "</tr>";
 										
@@ -368,10 +396,11 @@
 									$t1=$i+4;
 									$t2=$i+3;
 									$t3=$i+5;
+									$t4=$i+1;
 									echo "<td>" . $negociation["$t1"] . "€</td>";
 									echo "<td>" . $negociation["$t2"] . "€</td>";
 									echo "<td>" . $negociation["$t3"] . "</td>";
-									echo "<td>" ."la négosiation n'est pas finie"."</td>";
+									echo "<td>" ."<button name='negoc' class='btn btn-primary' type='submit' value=". $negociation["$t4"].">voir plus: </button>". "</td>";
 									echo "</tr>";
 
 
@@ -380,7 +409,103 @@
 							}
 							else{
 								echo "vous avez aucune négosiation en cour<br>";
-							}		
+							}	
+
+							//-----------------Notifications-------------------
+
+							if($temp6>0 ){
+								
+								echo "Voici vos notifications";
+								echo "<table border=\'1\'>";
+								// echo "<tr>";
+								// echo "<th>" ."Voici vos negociations en cours:". "</th>";
+								// echo "</tr>";
+								echo "<tr>";
+
+								//echo "<th>" . "ID" . "</th>";
+								echo "<th>" . "Nom de la recherche" . "</th>";
+								echo "<th>" . "suprimer la recherche" . "</th>";
+								echo "<th>" . "résultat de la recherche" . "</th>";
+								
+								echo "</tr>";
+								
+								for($i=0;$i<$temp6;$i=$i+3){
+									echo "<tr>";
+									$t0=$i;
+									$t1=$i+1;
+									$t2=$i+2;
+
+									$Nom_art_notif=$notifications["$t2"];
+											$user = "root";
+										$mdp = "";
+										$addr = "localhost";
+
+										// Connect to MySQL server
+										$db_handle = mysqli_connect($addr,$user, $mdp);
+
+											if($db_handle)
+											{
+												
+											}else 
+											{
+												die("Unable to connect. ERROR" . mysqli_error($db_handle));
+											}
+
+											$sql = "SET NAMES utf8";
+											$result = mysqli_query($db_handle, $sql);
+
+
+											$db_found = mysqli_select_db($db_handle, "ece-marketplace");
+
+											$sql = " SELECT * FROM articles WHERE Nom='$Nom_art_notif' ";
+													
+											$result = mysqli_query($db_handle, $sql);
+											$data = mysqli_fetch_assoc($result);
+											$temp7=0;
+											$Notif_article=[];
+											if($data!=NULL)
+											{
+												
+															
+													do{
+														foreach($data as $key => $value)
+														{
+							
+																$Notif_article["$temp7"]=$value;
+																$temp7=$temp7+1;		
+														}
+													}while ($data = mysqli_fetch_assoc($result));
+
+															
+											}
+											mysqli_close($db_handle);
+
+									echo "<td>" . $notifications["$t2"] . "</td>";
+									echo "<form action='suprimernotif.php' method='post'>";
+									echo "<td>". "<button name='suprnotif' class='btn btn-primary' type='submit' value=". $notifications["$t0"].">suprimer</button>".  "</td>";
+									echo "</form>";
+									 echo "<td>" ;
+									 if($temp7>0){
+									 	for($y=0;$y<$temp7;$y=$y+10){
+									 		$n0=$y;
+									 		$n3=$y+3;
+
+									 		echo "<button name='notif' class='btn btn-primary' type='submit' value=".$Notif_article["$n0"].">voir: ".$Notif_article["$n3"]."</button>";
+									 	}
+									 } 
+									 echo"</td>";
+									echo "</tr>";
+
+
+								}
+								echo "</table>";
+							}
+							else{
+								echo "vous avez aucune notification en cour<br>";
+							}	
+									echo "<form action='ajoutnotif.php'>";
+									echo "<button name='ajoutrnotif' class='btn btn-primary' type='submit' >ajout notification</button>";
+									echo "</form>";
 						
 						?>
 
