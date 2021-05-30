@@ -23,7 +23,7 @@
 
             $db_found = mysqli_select_db($db_handle, "ece-marketplace");  
 
-	$_SESSION['mes_articles'][0]= 1;
+	$_SESSION['mes_articles'][0]= 23;
 	$_SESSION['mes_articles'][1]= 2;
 	$_SESSION['mes_articles'][2]= 21;
 
@@ -112,44 +112,57 @@
                     	<thead class="thead-light">
                     		<?php  
                     			$var = count($_SESSION['mes_articles']);
+                    			$prix_total = 0;
                     			
                     			for ($i=0; $i<$var; $i++) {
-                    				$temp = $_SESSION['mes_articles'][$i];
+                    				if($_SESSION['mes_articles'][$i]!=NULL) {
+                    					$temp = $_SESSION['mes_articles'][$i];
+                    				
+	                    				$sql = "SELECT * FROM articles WHERE id_article = '$temp'";
+	                    				$result = mysqli_query($db_handle, $sql);
 
-                    				$sql = "SELECT * FROM articles WHERE id_article = '$temp'";
-                    				$result = mysqli_query($db_handle, $sql);
+	                    				$data = mysqli_fetch_assoc($result);
+	                    				if ($data !=NULL) {
+		                    				foreach ($data as $key => $value) {
+		    									$_data["$key"] = $value;
+		    								}
 
-                    				$data = mysqli_fetch_assoc($result);
-                    				if ($data !=NULL) {
-	                    				foreach ($data as $key => $value) {
-	    									$_data["$key"] = $value;
-	    								}
+		                    				$nom_article = $_data ['Nom'];
+		                    				$id_article = $_data ['id_article'];
 
-	                    				$nom_article = $_data ['Nom'];
+		                    				if($_data ['type_article']==1){
+		                    					$prix_article =  $_data ['prix'];
+		                    				} elseif ($_data ['type_article']==3) {
+		                    					$sql = "SELECT dernier_prix_vendeur FROM enchere WHERE id_articles = '$temp'";
+		                    					$result = mysqli_query($db_handle, $sql);
 
-	                    				if($_data ['type_article']==1){
-	                    					$prix_article =  $_data ['prix'];
-	                    				} elseif ($_data ['type_article']==3) {
-	                    					$sql = "SELECT dernier_prix_vendeur FROM enchere WHERE id_articles = '$temp'";
-	                    					$result = mysqli_query($db_handle, $sql);
+		                    					$data = mysqli_fetch_assoc($result);
 
-	                    					$data = mysqli_fetch_assoc($result);
+		                    					foreach ($data as $key => $value) {
+		                    						$prix_article = $value;
+		                    					}
+		                    				}
 
-	                    					foreach ($data as $key => $value) {
-	                    						$prix_article = $value;
-	                    					}
-	                    				}
+		                    				$prix_total = $prix_total + $prix_article;
 
-	                    				echo "<tr>";
-	                    				echo "<td>".$nom_article."</td>";
-	                    				echo "<td>".$prix_article."€</td>";
-	                    				echo "<tr>";
-	                    			}else{
-	                    				echo "Problemo";
+		                    				echo "<tr>";
+		                    				echo "<td>".$nom_article."</td>";
+		                    				echo "<td>".$prix_article."€</td>";
+		                    				echo "<form action='voirArticle.php' method='post'>";
+		                    				echo "<td><button class='btn btn-light' name='voirPlus' value = $id_article type='submit'>voir plus</button></td>";
+		                    				echo "</form>";
+		                    				echo "<form action='supprimerAchat.php' method='post'>";
+		                    				echo "<td><button class='btn btn-dark' name='supprimer_achat' value = $id_article type='submit'>SUPPRIMER</button></td>";
+		                    				echo "</form>";
+		                    				echo "</tr>";
+		                    			}
 	                    			}
-
-
                     			}
+                    			echo "<tr>";
+                    			echo "<form action='payement.php' method='post'>";
+	                    		echo "<td><button id='inscrire' class='btn btn-primary' type='submit' nom='payer' value='$prix_total'>PRIX TOTAL : ".$prix_total."€</button></td>";
+	                    		echo "</form>";
+	                    		echo "</tr>";
                     		?>
                     	</thead>
                     </table>
