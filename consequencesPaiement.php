@@ -82,5 +82,5 @@
 		}
 	}
 
-	//header('location: panierClient.php');
+	header('location: panierClient.php');
 ?>
