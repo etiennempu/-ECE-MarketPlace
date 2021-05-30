@@ -66,11 +66,8 @@ function make_slides_sellers($db_handle)
          WHERE articles.id_article = historique.id_articles 
          ORDER BY id_historique ASC";
  $result = mysqli_query($db_handle, $sql);
- $data = mysqli_fetch_assoc($result);
- foreach ($data as $key => $value) 
- {
-    $id_max=$value;
- }
+ 
+ 
  while($row = mysqli_fetch_array($result))
  {
   if($count == 0)
@@ -205,18 +202,18 @@ function make_slides_sellers($db_handle)
   <div class="container">
    <h2> Ventes</h2>
    <br />
-   <div id="carousel_sellers" class="carousel slide" data-ride="carousel">
+   <div id="dynamic_slide_show" class="carousel slide" data-ride="carousel">
     
 
     <div class="carousel-inner">
      <?php echo make_slides_sellers($db_handle); ?>
     </div>
-    <a class="left carousel-control" href="#carousel_sellers" data-slide="prev">
+    <a class="left carousel-control" href="#dynamic_slide_show" data-slide="prev">
      <span class="glyphicon glyphicon-chevron-left"></span>
      <span class="sr-only">Previous</span>
     </a>
 
-    <a class="right carousel-control" href="#carousel_sellers" data-slide="next">
+    <a class="right carousel-control" href="#dynamic_slide_show" data-slide="next">
      <span class="glyphicon glyphicon-chevron-right"></span>
      <span class="sr-only">Next</span>
     </a>
