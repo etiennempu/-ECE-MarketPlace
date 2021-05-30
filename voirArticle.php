@@ -142,19 +142,16 @@
 
                              for($i=1; $i<=3; $i++) { 
                                 if($i == 1){
-                                    echo "<div class='item'><img src=".$photo3." alt='photo3'/></div>";
-                                    echo "<div class='item'><img src=".$photo2." alt='photo2'/></div>";
+                                    
                                     echo "<div class='item active'><img src=".$photo1." alt='photo1'/></div>";
                                 }
                                 elseif($i == 2){
-                                    echo "<div class='item'><img src=".$photo1." alt='photo1'/></div>";
-                                    echo "<div class='item'><img src=".$photo3." alt='photo3'/></div>";
-                                    echo "<div class='item active'><img src=".$photo2." alt='photo2'/></div>";
+                                    
+                                    echo "<div class='item '><img src=".$photo2." alt='photo2'/></div>";
                                 }
                                 elseif($i == 3){
-                                    echo "<div class='item'><img src=".$photo2." alt='photo2'/></div>";
-                                    echo "<div class='item'><img src=".$photo2." alt='photo1'/></div>";
-                                    echo "<div class='item active'><img src=".$photo3." alt='photo3'/></div>";
+                                    
+                                    echo "<div class='item '><img src=".$photo3." alt='photo3'/></div>";
                                 }
                                 
                             }

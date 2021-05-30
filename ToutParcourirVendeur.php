@@ -107,7 +107,7 @@
                       <thead class="thead-light">
                         <tbody>
                             <?php 
-
+                                
                                 $id_vendeur = $_SESSION['id'];
 
                                 $sql="SELECT MAX(id_article) FROM articles WHERE id_vendeur = $id_vendeur";

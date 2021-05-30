@@ -28,7 +28,7 @@ function make_slides($db_handle)
 {
  $output = '';
  $count = 0;
- $sql = "SELECT * FROM articles ORDER BY id_articles ASC";
+ $sql = "SELECT * FROM articles ORDER BY id_article ASC";
  $result = mysqli_query($db_handle, $sql);
  $data = mysqli_fetch_assoc($result);
  foreach ($data as $key => $value) 
@@ -61,9 +61,9 @@ function make_slides_sellers($db_handle)
 {
  $output = '';
  $count = 0;
- $sql = "SELECT historique.id_article, historique.id_historique, historique.Nom_articles, articles.id_articles, articles.photo1 
+ $sql = "SELECT historique.id_articles, historique.id_historique, historique.Nom_articles, articles.id_article, articles.photo1 
          FROM historique, articles 
-         WHERE articles.id_articles = historique.id_article 
+         WHERE articles.id_article = historique.id_articles 
          ORDER BY id_historique ASC";
  $result = mysqli_query($db_handle, $sql);
  $data = mysqli_fetch_assoc($result);
@@ -183,18 +183,18 @@ function make_slides_sellers($db_handle)
   <div class="container">
    <h2> Sélection du Jour</h2>
    <br />
-   <div id="dynamic_slide_show" class="carousel slide" data-ride="carousel">
+   <div id="carousel_sellers_hd" class="carousel slide" data-ride="carousel">
     
 
     <div class="carousel-inner">
      <?php echo make_slides($db_handle); ?>
     </div>
-    <a class="left carousel-control" href="#dynamic_slide_show" data-slide="prev">
+    <a class="left carousel-control" href="#carousel_sellers_hd" data-slide="prev">
      <span class="glyphicon glyphicon-chevron-left"></span>
      <span class="sr-only">Previous</span>
     </a>
 
-    <a class="right carousel-control" href="#dynamic_slide_show" data-slide="next">
+    <a class="right carousel-control" href="#carousel_sellers_hd" data-slide="next">
      <span class="glyphicon glyphicon-chevron-right"></span>
      <span class="sr-only">Next</span>
     </a>
