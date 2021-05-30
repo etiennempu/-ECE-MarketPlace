@@ -49,7 +49,15 @@
 			var_dump($result);
 
 		} else {
-			    $sql="INSERT INTO negociation (id_articles, id_client, dernier_prix_client, dernier_prix_vendeur, compteur) VALUES ('$id_article', '$id_client', '$prix_nego', '0', '1')";
+				$sql="SELECT id_vendeur FROM articles WHERE id_article = $id_article";
+				$result = mysqli_query($db_handle, $sql);
+				$data = mysqli_fetch_assoc($result);
+
+				foreach ($data as $key => $value) {
+					$id_vendeur = $value;
+				}
+
+			    $sql="INSERT INTO negociation (id_articles, id_client, dernier_prix_client, dernier_prix_vendeur, compteur, vendeur_id) VALUES ('$id_article', '$id_client', '$prix_nego', '0', '1', '$id_vendeur')";
 			    $result = mysqli_query($db_handle, $sql);
 		}
 	}

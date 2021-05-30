@@ -26,4 +26,6 @@
 			
 		}
 	}
+
+	header("location: panierClient.php");
 ?>

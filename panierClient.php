@@ -23,9 +23,13 @@
 
             $db_found = mysqli_select_db($db_handle, "ece-marketplace");  
 
-	$_SESSION['mes_articles'][0]= 1;
-	$_SESSION['mes_articles'][1]= 10;
-	$_SESSION['mes_articles'][2]= 12;
+            if($_SERVER["REQUEST_METHOD"] == "POST") {
+			$id_panier = isset($_POST["ajoutPanier"])? $_POST["ajoutPanier"] : "";
+			echo $id_panier;
+
+			$var = count($_SESSION['mes_articles']);
+			$_SESSION['mes_articles'][$var] = $id_panier;
+		}
 
 
 ?>

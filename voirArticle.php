@@ -194,7 +194,9 @@
                         echo "<h2>Description:</h2>";
                         echo "<p>$description_article</p><br>";
                         if ($type_article==1) {
-                            echo "<button id='inscrire' class='btn btn-primary' type='submit'>AJOUTER AU PANIER</button>";
+                            echo "<form action='panierClient.php', method='post'>";
+                                echo "<button id='inscrire' class='btn btn-primary' name='ajoutPanier' value='$id_article' type='submit'>AJOUTER AU PANIER</button>";
+                                echo "</form>";
                         }
                         elseif($type_article==2){
                             echo "<form action = 'enchere.php' method ='post'>";
@@ -223,9 +225,13 @@
                                 echo "<input type='number' name='prix_nego' class='form-control' required='required' placeholder='Votre Negociation'  size='20px'>";
                                 echo "<button id='inscrire' class='btn btn-primary' name='negociation' value='$id_article' type='submit'>NEGOCIER</button>";
                                 echo "</form>";
-                                echo "<button id='inscrire' class='btn btn-primary' type='submit'>AJOUTER AU PANIER</button>";
+                                echo "<form action='panierClient.php', method='post'>";
+                                echo "<button id='inscrire' class='btn btn-primary' name='ajoutPanier' value='$id_article' type='submit'>AJOUTER AU PANIER</button>";
+                                echo "</form>";
                             }else {
-                                echo "<button id='inscrire' class='btn btn-primary' type='submit'>AJOUTER AU PANIER</button>";
+                                echo "<form action='negociation.php', method='post'>";
+                                echo "<button id='inscrire' class='btn btn-primary' name='ajoutPanier' value='$id_article' type='submit'>AJOUTER AU PANIER</button>";
+                                echo "</form>";
                             }
                             
                         }
