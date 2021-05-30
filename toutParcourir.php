@@ -95,7 +95,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<h1>FOOTER</h1>
+					<h1></h1>
 				</div>
 			</div>
 		</div>
