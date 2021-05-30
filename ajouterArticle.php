@@ -65,7 +65,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         mysqli_close($db_handle);
 
         header('Location: ToutParcourirVendeur.php');
-        //exit();
+        exit();
 
         }        
     }
