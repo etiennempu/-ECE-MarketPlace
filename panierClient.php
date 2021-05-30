@@ -1,18 +1,34 @@
 <?php
+	// On démarre la session AVANT d'écrire du code HTML
 	session_start();
+	// Variable connexion
+            $user = "root";
+            $mdp = "";
+            $addr = "localhost";
 
-	// On s'amuse à créer quelques variables de session dans $_SESSION
-	$_SESSION['id']=0;
-	$_SESSION['prenom'] = 'def';
-	$_SESSION['nom'] = 'def';
-	$_SESSION['mail'] = ' ';
-	$_SESSION['numero']=0;
-	$_SESSION['type']=0;
-	$_SESSION['photo']='adressepardefault';
-	$_SESSION['id_adresse'] =NULL;
-	$_SESSION['mes_articles']=[];
+            // Connect to MySQL server
+            $db_handle = mysqli_connect($addr,$user, $mdp);
+
+            if($db_handle) {
+
+            } 
+            else {
+                echo "pas trouve DB";
+                die("Unable to connect. ERROR" . mysqli_error($db_handle));
+            }
+
+            $sql = "SET NAMES utf8";
+            $result = mysqli_query($db_handle, $sql);
+
+
+            $db_found = mysqli_select_db($db_handle, "ece-marketplace");  
+
+	$_SESSION['mes_articles'][0]= 1;
+	$_SESSION['mes_articles'][1]= 2;
+	$_SESSION['mes_articles'][2]= 21;
+
+
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,7 +93,7 @@
 								<a class="nav-link" href="notifications.php"><img src="notifs.png" alt="bouton Notifications"></a>
 							</li>
 							<li class="nav-item">
-								<a class="nav-link" href="panier.php"><img src="panier.png" alt="bouton Panier"></a>
+								<a class="nav-link" href="panier.php"><img src="panierSelect.png" alt="bouton Panier"></a>
 							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="votreCompte.php"><img src="votreCompte.png" alt="bouton Votre Compte"></a>
@@ -92,7 +108,51 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<h1>SECTION</h1>
+					<table class="table">
+                    	<thead class="thead-light">
+                    		<?php  
+                    			$var = count($_SESSION['mes_articles']);
+                    			
+                    			for ($i=0; $i<$var; $i++) {
+                    				$temp = $_SESSION['mes_articles'][$i];
+
+                    				$sql = "SELECT * FROM articles WHERE id_article = '$temp'";
+                    				$result = mysqli_query($db_handle, $sql);
+
+                    				$data = mysqli_fetch_assoc($result);
+                    				if ($data !=NULL) {
+	                    				foreach ($data as $key => $value) {
+	    									$_data["$key"] = $value;
+	    								}
+
+	                    				$nom_article = $_data ['Nom'];
+
+	                    				if($_data ['type_article']==1){
+	                    					$prix_article =  $_data ['prix'];
+	                    				} elseif ($_data ['type_article']==3) {
+	                    					$sql = "SELECT dernier_prix_vendeur FROM enchere WHERE id_articles = '$temp'";
+	                    					$result = mysqli_query($db_handle, $sql);
+
+	                    					$data = mysqli_fetch_assoc($result);
+
+	                    					foreach ($data as $key => $value) {
+	                    						$prix_article = $value;
+	                    					}
+	                    				}
+
+	                    				echo "<tr>";
+	                    				echo "<td>".$nom_article."</td>";
+	                    				echo "<td>".$prix_article."€</td>";
+	                    				echo "<tr>";
+	                    			}else{
+	                    				echo "Problemo";
+	                    			}
+
+
+                    			}
+                    		?>
+                    	</thead>
+                    </table>
 				</div>
 			</div>
 			<div class="row">

@@ -1,6 +1,13 @@
 <?php
-// On démarre la session AVANT d'écrire du code HTML
-session_start();
+	// On démarre la session AVANT d'écrire du code HTML
+	session_start();
+
+	if($_SESSION['type']==1)
+    {
+        header("location: panierClient.php");
+
+    }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -81,7 +88,7 @@ session_start();
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<h1>SECTION</h1>
+					Veuillez vous connetcter ou vous inscrire pour avoir accès au panier
 				</div>
 			</div>
 			<div class="row">
