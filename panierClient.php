@@ -23,9 +23,9 @@
 
             $db_found = mysqli_select_db($db_handle, "ece-marketplace");  
 
-	$_SESSION['mes_articles'][0]= 23;
-	$_SESSION['mes_articles'][1]= 2;
-	$_SESSION['mes_articles'][2]= 21;
+	$_SESSION['mes_articles'][0]= 1;
+	$_SESSION['mes_articles'][1]= 10;
+	$_SESSION['mes_articles'][2]= 12;
 
 
 ?>
@@ -130,10 +130,10 @@
 		                    				$nom_article = $_data ['Nom'];
 		                    				$id_article = $_data ['id_article'];
 
-		                    				if($_data ['type_article']==1){
+		                    				if($_data ['type_article']==1 ){
 		                    					$prix_article =  $_data ['prix'];
 		                    				} elseif ($_data ['type_article']==3) {
-		                    					$sql = "SELECT dernier_prix_vendeur FROM enchere WHERE id_articles = '$temp'";
+		                    					$sql = "SELECT dernier_prix_vendeur FROM negociation WHERE id_articles = '$temp'";
 		                    					$result = mysqli_query($db_handle, $sql);
 
 		                    					$data = mysqli_fetch_assoc($result);

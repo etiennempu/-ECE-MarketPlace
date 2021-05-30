@@ -355,7 +355,9 @@
 										echo "<td>" . $enchere["$t3"] . "€</td>";
 										echo "<td>" . $enchere["$t5"] . "</td>";
 										echo "<td>" . $enchere["$t6"] . "</td>";
-										echo "<td>" . "<button name='negoc' class='btn btn-primary' type='submit' value=". $enchere["$t1"].">voir plus: </button>". "</td>";
+										$idenchere=$enchere["$t1"];
+										echo "<form action='voirArticle.php' method='post'>";
+										echo "<td>" . "<button name='voirPlus' class='btn btn-primary' type='submit' value='$idenchere'>voir plus: </button>". "</td>";
 										echo "<td>" ."l'enchère n'est pas finie"."</td>";
 										echo "</tr>";
 										
@@ -387,7 +389,7 @@
 								//echo "<th>" . "ID" . "</th>";
 								echo "<th>" . "Proposition du vendeur" . "</th>";
 								echo "<th>" . "votre proposition" . "</th>";
-								echo "<th>" . "nombre de négosiation restante" . "</th>";
+								echo "<th>" . "évolution de la négosiation" . "</th>";
 								echo "<th>" . "plus d'info sûr l'article" . "</th>";
 								echo "</tr>";
 								
@@ -397,10 +399,13 @@
 									$t2=$i+3;
 									$t3=$i+5;
 									$t4=$i+1;
+									$idnegociation= $negociation["$t4"];
 									echo "<td>" . $negociation["$t1"] . "€</td>";
 									echo "<td>" . $negociation["$t2"] . "€</td>";
-									echo "<td>" . $negociation["$t3"] . "</td>";
-									echo "<td>" ."<button name='negoc' class='btn btn-primary' type='submit' value=". $negociation["$t4"].">voir plus: </button>". "</td>";
+									echo "<td>" . $negociation["$t3"] . "/9</td>";
+									echo "<form action='voirArticle.php' method='post'>";
+									echo "<td>" ."<button name='voirPlus' class='btn btn-primary' type='submit' value='$idnegociation'>voir plus: </button>". "</td>";
+									echo"</form>";
 									echo "</tr>";
 
 
@@ -489,8 +494,10 @@
 									 	for($y=0;$y<$temp7;$y=$y+10){
 									 		$n0=$y;
 									 		$n3=$y+3;
-
-									 		echo "<button name='notif' class='btn btn-primary' type='submit' value=".$Notif_article["$n0"].">voir: ".$Notif_article["$n3"]."</button>";
+									 		$idnotification=$Notif_article["$n0"];
+									 		echo "<form action='voirArticle.php' method='post'>";
+									 		echo "<button name='voirPlus' class='btn btn-primary' type='submit' value='$idnotification'>voir plus : ".$Notif_article["$n3"]."</button>";
+									 		echo "</form>";
 									 	}
 									 } 
 									 echo"</td>";

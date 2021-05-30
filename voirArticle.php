@@ -218,7 +218,7 @@
                                 $nego_cpt = 0;
                             }
                             
-                            if ($nego_cpt < 10) {
+                            if ($nego_cpt==0 || $nego_cpt==2 || $nego_cpt==4 || $nego_cpt==6 || $nego_cpt==8) {
                                 echo "<form action='negociation.php', method='post'>";
                                 echo "<input type='number' name='prix_nego' class='form-control' required='required' placeholder='Votre Negociation'  size='20px'>";
                                 echo "<button id='inscrire' class='btn btn-primary' name='negociation' value='$id_article' type='submit'>NEGOCIER</button>";
