@@ -183,18 +183,18 @@ function make_slides_sellers($db_handle)
   <div class="container">
    <h2> Sélection du Jour</h2>
    <br />
-   <div id="carousel_sellers_hd" class="carousel slide" data-ride="carousel">
+   <div id="carousel_selection" class="carousel slide" data-ride="carousel">
     
 
     <div class="carousel-inner">
      <?php echo make_slides($db_handle); ?>
     </div>
-    <a class="left carousel-control" href="#carousel_sellers_hd" data-slide="prev">
+    <a class="left carousel-control" href="#carousel_selection" data-slide="prev">
      <span class="glyphicon glyphicon-chevron-left"></span>
      <span class="sr-only">Previous</span>
     </a>
 
-    <a class="right carousel-control" href="#carousel_sellers_hd" data-slide="next">
+    <a class="right carousel-control" href="#carousel_selection" data-slide="next">
      <span class="glyphicon glyphicon-chevron-right"></span>
      <span class="sr-only">Next</span>
     </a>
@@ -203,20 +203,20 @@ function make_slides_sellers($db_handle)
   </div>
 
   <div class="container">
-   <h2> Ventes</h2>
+   <h2> Dernieres Ventes</h2>
    <br />
-   <div id="dynamic_slide_show" class="carousel slide" data-ride="carousel">
+   <div id="carousel_sellers" class="carousel slide" data-ride="carousel">
     
 
     <div class="carousel-inner">
      <?php echo make_slides_sellers($db_handle); ?>
     </div>
-    <a class="left carousel-control" href="#dynamic_slide_show" data-slide="prev">
+    <a class="left carousel-control" href="#carousel_sellers" data-slide="prev">
      <span class="glyphicon glyphicon-chevron-left"></span>
      <span class="sr-only">Previous</span>
     </a>
 
-    <a class="right carousel-control" href="#dynamic_slide_show" data-slide="next">
+    <a class="right carousel-control" href="#carousel_sellers" data-slide="next">
      <span class="glyphicon glyphicon-chevron-right"></span>
      <span class="sr-only">Next</span>
     </a>

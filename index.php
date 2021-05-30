@@ -92,12 +92,18 @@
 		<div class="container">
 			<div class="row">
 				<div class="col">
-					<h1>SECTION</h1>
+					<p class="p1">Bonjour et bienvenue sur ECE MarketPlace, <br> Vous voici sur la page d'accueil de l'ECE Market Place, cette plateforme permet d'acheter des articles mis en vente par des particuliers, de pouvoir faire une transaction entre un vendeur et un client sur un article pour négocier un prix acceptable mais également pour un client de mettre sa meilleur offre dans un objet vendu par enchère.<br> 
+					Afin de pouvoir profiter de la plateforme veuillez-vous connecter.<br>
+
+
+				</p>
+					<br />
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
-					<h1>FOOTER</h1>
+					<div id="footer"><br>Copyright &copy; 2021 ECE Market Place, 01 39 94 53 71, 6 rue Saint Augustin Paris 75002<br>
+						<a href="mailto:Ece.marketplace@gmail.com">Ece.marketplace@gmail.com<a/>
 				</div>
 			</div>
 		</div>

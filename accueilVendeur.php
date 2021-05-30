@@ -177,7 +177,7 @@ function make_slides_sellers($db_handle)
 			<div class="row">
 				<div class="col">
 					
-					<p class="p1">Bonjour Vendeur, <br> Vous voici sur la page d'accueil de l'ECE Market Place, ce site permet d'acheter des articles en vente sur le site, de pouvoir faire une transaction vendeur-client sur un article pour négocier un prix acceptable entre le client et le vendeur mais également pour un client de mettre sa meilleur offre dans un item vendu par enchère.<br> 
+					<p>Bonjour Vendeur, <br> Vous voici sur la page d'accueil de l'ECE Market Place, ce site permet d'acheter des articles en vente sur le site, de pouvoir faire une transaction vendeur-client sur un article pour négocier un prix acceptable entre le client et le vendeur mais également pour un client de mettre sa meilleur offre dans un item vendu par enchère.<br> 
 					Vous êtes ici sur la page d'accueil ou vous pouvez trouver une sélection du jour avec les articles mis en vente récemment ainsi que les best sellers du moment.</p>
 					<br />
   <div class="container">

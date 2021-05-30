@@ -118,15 +118,14 @@ td{
 	height: 50px;
 	font-size: 1.5em;
 }
-#carousel_sellers_hd{
+#carousel_sellers{
 	height:100%;
-	width:100%;
+	width:40%;
 }
-#dynamic_slide_show{
+#carousel_selection{
 	height:100%;
-	width:100%;
+	width:40%;
 }
-
 
 
 
