@@ -66,11 +66,8 @@ function make_slides_sellers($db_handle)
          WHERE articles.id_article = historique.id_articles 
          ORDER BY id_historique ASC";
  $result = mysqli_query($db_handle, $sql);
- $data = mysqli_fetch_assoc($result);
- foreach ($data as $key => $value) 
- {
-    $id_max=$value;
- }
+ 
+ 
  while($row = mysqli_fetch_array($result))
  {
   if($count == 0)
@@ -177,24 +174,24 @@ function make_slides_sellers($db_handle)
 			<div class="row">
 				<div class="col">
 					
-					<p class="p1">Bonjour Administrateur, <br> Vous voici sur la page d'accueil de l'ECE Market Place, ce site permet d'acheter des articles en vente sur le site, de pouvoir faire une transaction vendeur-client sur un article pour négocier un prix acceptable entre le client et le vendeur mais également pour un client de mettre sa meilleur offre dans un item vendu par enchère.<br> 
+					<p class="p1">Bonjour Admin, <br> Vous voici sur la page d'accueil de l'ECE Market Place, ce site permet d'acheter des articles en vente sur le site, de pouvoir faire une transaction vendeur-client sur un article pour négocier un prix acceptable entre le client et le vendeur mais également pour un client de mettre sa meilleur offre dans un item vendu par enchère.<br> 
 					Vous êtes ici sur la page d'accueil ou vous pouvez trouver une sélection du jour avec les articles mis en vente récemment ainsi que les best sellers du moment.</p>
 					<br />
   <div class="container">
    <h2> Sélection du Jour</h2>
    <br />
-   <div id="carousel_selection" class="carousel slide" data-ride="carousel">
+   <div id="dynamic_slide_show" class="carousel slide" data-ride="carousel">
     
 
     <div class="carousel-inner">
      <?php echo make_slides($db_handle); ?>
     </div>
-    <a class="left carousel-control" href="#carousel_selection" data-slide="prev">
+    <a class="left carousel-control" href="#dynamic_slide_show" data-slide="prev">
      <span class="glyphicon glyphicon-chevron-left"></span>
      <span class="sr-only">Previous</span>
     </a>
 
-    <a class="right carousel-control" href="#carousel_selection" data-slide="next">
+    <a class="right carousel-control" href="#dynamic_slide_show" data-slide="next">
      <span class="glyphicon glyphicon-chevron-right"></span>
      <span class="sr-only">Next</span>
     </a>
@@ -203,20 +200,20 @@ function make_slides_sellers($db_handle)
   </div>
 
   <div class="container">
-   <h2> Dernieres Ventes</h2>
+   <h2> Ventes</h2>
    <br />
-   <div id="carousel_sellers" class="carousel slide" data-ride="carousel">
+   <div id="dynamic_slide_show" class="carousel slide" data-ride="carousel">
     
 
     <div class="carousel-inner">
      <?php echo make_slides_sellers($db_handle); ?>
     </div>
-    <a class="left carousel-control" href="#carousel_sellers" data-slide="prev">
+    <a class="left carousel-control" href="#dynamic_slide_show" data-slide="prev">
      <span class="glyphicon glyphicon-chevron-left"></span>
      <span class="sr-only">Previous</span>
     </a>
 
-    <a class="right carousel-control" href="#carousel_sellers" data-slide="next">
+    <a class="right carousel-control" href="#dynamic_slide_show" data-slide="next">
      <span class="glyphicon glyphicon-chevron-right"></span>
      <span class="sr-only">Next</span>
     </a>
