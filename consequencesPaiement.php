@@ -68,8 +68,9 @@
 				}
 			
 
-				$sql = "INSERT INTO `historique` (`id_articles`, `Nom_articles`, `dates de vents`, `prix de ventes`, `id_client`, `Nom_client`, `id_vendeur`, `Nom_vendeur`) VALUES ('$id_articlee', '$nom_article', '$date_de_vente', '$prix_de_vente', '$id_client', '$nom_client', '$id_vendeur', '$nom_vendeur') ";
+				$sql = "INSERT INTO `historique` (`id_articles`, `Nom_articles`, `dates de vents`, `prix de ventes`, `id_client`, `Nom_client`, `id_vendeur`, `Nom_vendeur`) VALUES ('$id_article', '$nom_article', '$date_de_vente', '$prix_de_vente', '$id_client', '$nom_client', '$id_vendeur', '$nom_vendeur') ";
 				$result = mysqli_query($db_handle, $sql);
+				var_dump($result);
 
 				$sql = "DELETE FROM articles WHERE id_article='$id_article'";
 		        $result = mysqli_query($db_handle, $sql);
@@ -81,5 +82,5 @@
 		}
 	}
 
-	header('location: panierClient.php');
+	//header('location: panierClient.php');
 ?>
