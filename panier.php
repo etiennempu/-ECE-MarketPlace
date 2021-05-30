@@ -91,11 +91,6 @@
 					Veuillez vous connetcter ou vous inscrire pour avoir accès au panier
 				</div>
 			</div>
-			<div class="row">
-				<div class="col">
-					<h1>FOOTER</h1>
-				</div>
-			</div>
 		</div>
 
 	</div>

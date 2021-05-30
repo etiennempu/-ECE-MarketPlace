@@ -91,14 +91,6 @@
 		<div class="section container">
 		</div>
 
-		<!--FOOTER-->
-		<div class="container">
-			<div class="row">
-				<div class="col">
-					<h1>FOOTER</h1>
-				</div>
-			</div>
-		</div>
 
 	</div>
 
