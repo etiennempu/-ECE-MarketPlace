@@ -191,11 +191,6 @@ session_start();
 				</form>	
 				</div>
 			</div>
-			<div class="row">
-				<div class="col">
-					<h1>FOOTER</h1>
-				</div>
-			</div>
 		</div>
 
 	</div>
