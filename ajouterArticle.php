@@ -13,11 +13,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     $photo3 = isset($_POST["photo3"])? $_POST["photo3"] : "";
     $id_vendeur = $_SESSION['id'];
 
-    echo $nom_article."<br>";
-    echo $type_article."<br>";
-    echo $prix."<br>";
-    echo $description."<br>";
-    echo $id_vendeur."<br>";
  
 
     $user = "root";
@@ -42,7 +37,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if($db_found)
     {
-        $sql = "INSERT INTO articles (id_vendeur, type_article, Nom, prix, photo1, photo2, photo3, video, description) VALUES ('$id_vendeur', '$type_article', '$nom_article', '$prix', '$photo1', '$photo2', '$photo3', '', '$description')";
+        if ($prix<0) {
+            echo "<script>alert('Inserez un prix positif')</script>";
+        }else{
+            $sql = "INSERT INTO articles (id_vendeur, type_article, Nom, prix, photo1, photo2, photo3, video, description) VALUES ('$id_vendeur', '$type_article', '$nom_article', '$prix', '$photo1', '$photo2', '$photo3', '', '$description')";
         $result = mysqli_query($db_handle, $sql);
 
         if ($type_article==2) {
@@ -69,7 +67,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
         header('Location: ToutParcourirVendeur.php');
         //exit();
 
-        
+        }        
     }
     }
 ?>

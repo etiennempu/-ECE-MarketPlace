@@ -25,7 +25,6 @@
 
             if($_SERVER["REQUEST_METHOD"] == "POST") {
 			$id_panier = isset($_POST["ajoutPanier"])? $_POST["ajoutPanier"] : "";
-			echo $id_panier;
 
 			$var = count($_SESSION['mes_articles']);
 			$_SESSION['mes_articles'][$var] = $id_panier;
@@ -136,10 +135,10 @@
 
 		                    				if($_data ['type_article']==1 ){
 		                    					$prix_article =  $_data ['prix'];
+
 		                    				} elseif ($_data ['type_article']==3) {
 		                    					$sql = "SELECT dernier_prix_vendeur FROM negociation WHERE id_articles = '$temp'";
 		                    					$result = mysqli_query($db_handle, $sql);
-
 		                    					$data = mysqli_fetch_assoc($result);
 
 		                    					foreach ($data as $key => $value) {
@@ -162,11 +161,14 @@
 		                    			}
 	                    			}
                     			}
-                    			echo "<tr>";
-                    			echo "<form action='payement.php' method='post'>";
-	                    		echo "<td><button id='inscrire' class='btn btn-primary' type='submit' nom='payer' value='$prix_total'>PRIX TOTAL : ".$prix_total."€</button></td>";
-	                    		echo "</form>";
-	                    		echo "</tr>";
+
+                    			if ($prix_total>0) {
+                    				echo "<tr>";
+	                    			echo "<form action='payement.php' method='post'>";
+		                    		echo "<td><button id='inscrire' class='btn btn-primary' type='submit' name='payer' value='$prix_total'>PRIX TOTAL : ".$prix_total."€</button></td>";
+		                    		echo "</form>";
+		                    		echo "</tr>";
+	                    		}
                     		?>
                     	</thead>
                     </table>

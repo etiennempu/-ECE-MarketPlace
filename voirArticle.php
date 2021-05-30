@@ -229,7 +229,7 @@
                                 echo "<button id='inscrire' class='btn btn-primary' name='ajoutPanier' value='$id_article' type='submit'>AJOUTER AU PANIER</button>";
                                 echo "</form>";
                             }else {
-                                echo "<form action='negociation.php', method='post'>";
+                                echo "<form action='panierClient.php', method='post'>";
                                 echo "<button id='inscrire' class='btn btn-primary' name='ajoutPanier' value='$id_article' type='submit'>AJOUTER AU PANIER</button>";
                                 echo "</form>";
                             }
