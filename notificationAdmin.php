@@ -231,7 +231,7 @@ session_start();
 								echo "</table>";
 							}
 							else{
-								echo "vous avez aucune négosiation en cour<br>";
+								echo "vous avez aucune négociation en cours<br>";
 							}	
 
 								?>
